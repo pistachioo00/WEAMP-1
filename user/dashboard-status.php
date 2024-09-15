@@ -163,7 +163,7 @@ checkLogin();
                 $progress = 25;
                 $class = 'bg-warning';
                 break;
-            case 'ACKNOWLEDGED':
+            case 'In Progress':
                 $message = "Your complaint is being processed. <br> Kindly wait for an invitation to proceed for an interview with our SEnA Desk Officer (SEADO).";
                 $progress = 50;
                 $class = 'bg-info';

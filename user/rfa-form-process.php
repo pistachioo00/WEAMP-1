@@ -27,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $reliefsRemarks = htmlspecialchars($_POST['reliefsRemarks']);
 
         // Combine selected checkbox values into a single string
-        $combinedClaimsAndIssues = implode(",", $selectedClaimsAndIssues);
-        $combinedReliefPrayedFor = implode(",", $selectedReliefPrayedFor);
+        $combinedClaimsAndIssues = implode(", ", $selectedClaimsAndIssues);
+        $combinedReliefPrayedFor = implode(", ", $selectedReliefPrayedFor);
 
         // If "Others" is selected, append the text field data to the selected checkboxes
         if ($othersClaims) {

@@ -16,7 +16,7 @@ function checkNoAssignment($adminID) {
             WHERE 
                 assign.adminID = ?
             AND
-                rfa.status = 'IN PROGRESS';";
+                rfa.status != 'PENDING';";
               
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("i", $adminID);

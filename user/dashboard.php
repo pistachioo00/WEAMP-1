@@ -2,9 +2,8 @@
 <?php
 include 'auth.php';
 checkLogin();
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,8 +93,8 @@ checkLogin();
                 <a class="navbar-brand" href="../user/home.php">
                     <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 80px;">
                 </a>
-                <button style="width: 10%; height: 50%" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button style="width: 10%; height: 50%; background-color: #fff; border: none;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="color: #C80000;"></span>
                 </button>
                 <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
@@ -115,24 +114,28 @@ checkLogin();
                             <a class="nav-link" href="../user/contact-us.php">Contact</a>
                         </li>
                         <div class="mr-5"></div>
-                        <li>
-                            <a class="nav-link" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications" onclick="resetCollapse()">
-                                <img src="../assets/Bell-Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="../user/my-account.php">
-                                <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
-                                My Account
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#" onclick="showLogoutConfirmation()">
-                                <img src="../assets/Sign_out_squre.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
-                                Log Out
-                            </a>
-                        </li>
                     </ul>
+                    <div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
+                                    <img src="../assets/Bell_Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="../user/my-account.php">
+                                    <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
+                                    My Account
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" onclick="showLogoutConfirmation()">
+                                    <img src="../assets/Sign_out_square.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
+                                    Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -167,20 +170,20 @@ checkLogin();
             </div>
         </div>
 
-            <!-- RETRIEVE NG ACCOUNT INFORMATION -->
-            <?php
+        <!-- RETRIEVE NG ACCOUNT INFORMATION -->
+        <?php
 
-            include '../public/config.php';
+        include '../public/config.php';
 
-            $accountID = $_SESSION['accountID'];
+        $accountID = $_SESSION['accountID'];
 
-            $sql = "SELECT * FROM account WHERE accountID = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $accountID);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $user = $result->fetch_assoc();
-            ?>
+        $sql = "SELECT * FROM account WHERE accountID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $accountID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        ?>
 
         <section class="welcome-sec">
             <div class="container">
@@ -233,7 +236,7 @@ checkLogin();
                 </div>
                 <div class="col-md-4">
                     <div class="rectangle">
-                        <h4 class="fw-bold mt-2" style="font-family: sub-font-bold">SETLLED AGREEMENT</h4>
+                        <h4 class="fw-bold mt-2" style="font-family: sub-font-bold">SETTLED AGREEMENT</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0; padding-right: 35%">0</h1> <!-- Remove margin bottom for alignment -->
                             <img src="../assets/settled-agreement.svg" alt="" style="max-width: 100%; padding-left: 10px;"> <!-- Add padding-left for spacing -->
@@ -307,7 +310,6 @@ checkLogin();
     });
 
     // SIDE MENU
-
 </script>
 
 </html>

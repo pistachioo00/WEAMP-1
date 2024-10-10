@@ -20,19 +20,20 @@ if (isset($_POST['referenceID'])) {
             FROM rfa rfa 
             INNER JOIN account acc ON rfa.accountID = acc.accountID 
             WHERE rfa.referenceID = ?;";
-            
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $referenceID);
     $stmt->execute();
     $result = $stmt->get_result();
     $assign = $result->fetch_assoc();
 
+
     if ($assign) {
         // Insert the data into the assignment table
         $sql = "INSERT INTO assignment (referenceID, accountID, adminID, datetime) VALUES (?, ?, ?, NOW())";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iii", $assign['referenceID'], $assign['accountID'], $adminID);
-        
+
         if ($stmt->execute()) {
             // Redirect back to the entries.php page with a success message
             header("Location: rfa-entries.php");
@@ -52,4 +53,3 @@ if (isset($_POST['referenceID'])) {
     header("Location: rfa-entries.php?status=invalid");
     exit();
 }
-?>

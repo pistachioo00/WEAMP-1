@@ -60,7 +60,6 @@
   src: url(../fonts/Inter-Medium.ttf);
 }
 
-
 /* Navbar brand logo */
 .navbar-brand img {
   margin-right: 10px;
@@ -268,8 +267,6 @@ button:hover {
 #terms-conditions {
   font-size: small;
 }
-
-
 
 .login {
   text-decoration: underline;
@@ -803,6 +800,27 @@ label {
 }
 
 /* ASSIGNMENT TAKE ACTION */
+
+/* SIDEBAR - DASHBOARD SA */
+.navbar-nav .nav-item .nav-link {
+  color: white;
+}
+
+.rectangle {
+  background-color: white;
+  border: 2.5px solid #146fca;
+}
+
+.rectangle h4 {
+  font-family: sub-font-bold;
+  color: #304da5;
+}
+
+.rectangle h1 {
+  margin-bottom: 0;
+  padding-right: 35%;
+  color: #465da3;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

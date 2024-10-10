@@ -40,8 +40,8 @@
                 </div>
 
                 <div class="col-12 text-center" style="margin-bottom: -10px;">
-                    <h1 class="display-2 mb-2" style="font-family: main-font; font-size: 3.5rem; margin-bottom: -5px; color: #1C05B3; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">WEMP</h1>
-                    <p class="display-2 mb-0" style="font-family: Arial, sans serif; font-size: 1.3rem; margin-top: -5px; color: #3682CC">Workers and Employers Management Platform</p>
+                    <h1 class="display-2 mb-2" style="font-family: main-font; font-size: 3.5rem; margin-bottom: -5px; color: #1C05B3; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">WEAMP</h1>
+                    <p class="display-2 mb-0" style="font-family: Arial, sans serif; font-size: 1.3rem; margin-top: -5px; color: #3682CC">Workers and Employers Affairs Management Platform</p>
                 </div>
 
             </div>

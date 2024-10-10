@@ -124,54 +124,56 @@ checkLogin();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #C80000;">
+    <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #C80000;">
         <div class="container">
             <a class="navbar-brand" href="../user/home.php">
-                <img src="../assets/WAO-Logo.svg" alt="Header-Title" class="img-fluid" style="width: 300px; height: 80px;">
+                <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 80px;">
             </a>
-            <button style="width: 10%; height: 50%" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button style="width: 10%; height: 50%; background-color: #fff; border: none;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="color: #C80000;"></span>
             </button>
+            <div class="mr-5"></div>
             <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 mr-5">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="../user/home.php">Home</a>
+                        <a class="nav-link text-white" href="../user/home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="../user/rfa.php">RFA</a>
+                        <a class="nav-link text-white" href="../user/rfa.php">RFA</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="../user/dashboard-status.php">Dashboard</a>
+                        <a class="nav-link text-white" href="../user/dashboard-status.php">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="../user/about.php">About</a>
+                        <a class="nav-link text-white" href="../user/about.php">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="../user/contact-us.php">Contact</a>
+                        <a class="nav-link text-white" href="../user/contact-us.php">Contact</a>
                     </li>
                     <div class="mr-5"></div>
-                    <li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
                             <img src="../assets/Bell_Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="../user/my-account.php">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../user/my-account.php">
                             <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
-                            <span style="color: white;">My Account</span>
+                            My Account
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="logout.php" onclick="showLogoutConfirmation()">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#" onclick="showLogoutConfirmation()">
                             <img src="../assets/Sign_out_square.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
-                            <span style="color: white;">Log Out</span>
+                            Log Out
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
 
     <!-- Add the logout confirmation modal markup -->
     <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" aria-labelledby="logoutConfirmationModalLabel" aria-hidden="true">
@@ -203,7 +205,7 @@ checkLogin();
 
     <section class="welcome-sec">
         <div class="container">
-            <h1 class="text-start" style="font-family: main-font; font-size: 5rem; padding-top: 5%">WEMP</h1>
+            <h1 class="text-start" style="font-family: main-font; font-size: 5rem">WEMP</h1>
             <h2 class="text-start" style="font-family: Arial, sans serif; font-weight: bold">Welcome to Workers and Employers Management Platforms<br> of Valenzuela City Worker’s Affairs Office</h2>
         </div>
     </section>
@@ -409,9 +411,12 @@ checkLogin();
 
     var inter = setInterval(clock, 400);
 
+
     function showLogoutConfirmation() {
-        $('#logoutConfirmationModal').modal('show');
+        var logoutModal = new bootstrap.Modal(document.getElementById('logoutConfirmationModal'));
+        logoutModal.show();
     }
+
 
     function logout() {
         window.location.href = "../public/home.php";

@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['selfie']) && isset($_
         $selfie_ext = strtolower(pathinfo($selfie_name, PATHINFO_EXTENSION));
         if (in_array($selfie_ext, $allowed_exs)) {
             $new_selfie_name = uniqid("SELFIE-", true) . '.' . $selfie_ext;
-            $selfie_upload_path = '../uploads/selfie' . $new_selfie_name;
+            $selfie_upload_path = '../uploads/selfieWithID/' . $new_selfie_name;
             move_uploaded_file($selfie_tmp_name, $selfie_upload_path);
         } else {
             echo "Invalid file type for selfie.";
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['selfie']) && isset($_
         $id_ext = strtolower(pathinfo($id_name, PATHINFO_EXTENSION));
         if (in_array($id_ext, $allowed_exs)) {
             $new_id_name = uniqid("ID-", true) . '.' . $id_ext;
-            $id_upload_path = '../uploads/governmentID' . $new_id_name;
+            $id_upload_path = '../uploads/governmentID/' . $new_id_name;
             move_uploaded_file($id_tmp_name, $id_upload_path);
         } else {
             echo "Invalid file type for government ID.";

@@ -127,7 +127,7 @@ include 'signin-check.php';
                     </li>
                     <li>
                         <a class="nav-link" style="text-decoration: none; color: white;" href="../public/login.php">
-                            <img src="../assets/Sign_in_squre.svg" alt="Sign-in" style="width: 20px; height: 20px; margin-right: 5px;">
+                            <img src="../assets/Sign_in_square.svg" alt="Sign-in" style="width: 20px; height: 20px; margin-right: 5px;">
                             Sign in
                         </a>
                     </li>

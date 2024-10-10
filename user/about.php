@@ -87,6 +87,7 @@ checkLogin();
                     <li class="nav-item">
                         <a class="nav-link text-white" href="../user/contact-us.php">Contact</a>
                     </li>
+                    <div class="mr-5"></div>
                 </ul>
                 <div>
                     <ul class="navbar-nav">

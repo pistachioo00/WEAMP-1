@@ -36,18 +36,18 @@ checkAdminLogin();
                         <a class="nav-link" href="../admin/dashboard.php">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" id="rfaLink" data-bs-toggle="popover" 
-                    data-bs-html="true" data-bs-trigger="click" data-bs-title-center="RFA" 
-                    data-bs-content='<div><a class="nav-link" href="rfa-entries.php" class="btn btn-link">New Entries</a><br><a class="nav-link" href="rfa-assignment.php" class="btn btn-link">Assignment</a></div>' data-bs-placement="bottom">
-                        RFA
-                    </a>
+                        <a class="nav-link active" aria-current="page" href="#" id="rfaLink" data-bs-toggle="popover"
+                            data-bs-html="true" data-bs-trigger="click" data-bs-title-center="RFA"
+                            data-bs-content='<div><a class="nav-link" href="rfa-entries.php" class="btn btn-link">New Entries</a><br><a class="nav-link" href="rfa-assignment.php" class="btn btn-link">Assignment</a></div>' data-bs-placement="bottom">
+                            RFA
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="recordsLink" data-bs-toggle="popover" 
-                        data-bs-html="true" data-bs-trigger="click" data-bs-title-center="Records" 
-                        data-bs-content='<div><a class="nav-link" href="sena-records.php" class="btn btn-link">SENA Conferences</a><br><a class="nav-link" href="#" class="btn btn-link">Advice Counselling</a></div>' data-bs-placement="bottom">
-                        Records
-                    </a>
+                        <a class="nav-link" href="#" id="recordsLink" data-bs-toggle="popover"
+                            data-bs-html="true" data-bs-trigger="click" data-bs-title-center="Records"
+                            data-bs-content='<div><a class="nav-link" href="sena-records.php" class="btn btn-link">SENA Conferences</a><br><a class="nav-link" href="#" class="btn btn-link">Advice Counselling</a></div>' data-bs-placement="bottom">
+                            Records
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -66,19 +66,19 @@ checkAdminLogin();
             </div>
 
             <a href="#">
-                    <ul class="navbar-nav ml-auto">
-                        <a class="nav-link" href="../admin/admin-account.php">
-                            <img src="../assets/User.svg" alt="My-Account"
-                                style="width: 20px; height: 20px; margin-right: 5px;">
-                            My Account
-                        </a>
-                        <a class="nav-link" href="logout.php" onclick="showLogoutConfirmation()">
-                            <img src="../assets/Sign_out_squre.svg" alt="Sign-out"
-                                style="width: 20px; height: 20px; margin-right: 5px;">
-                            Log Out
-                        </a>
-                    </ul>
-                </a>
+                <ul class="navbar-nav ml-auto">
+                    <a class="nav-link" href="../admin/admin-account.php">
+                        <img src="../assets/User.svg" alt="My-Account"
+                            style="width: 20px; height: 20px; margin-right: 5px;">
+                        My Account
+                    </a>
+                    <a class="nav-link" href="logout.php" onclick="showLogoutConfirmation()">
+                        <img src="../assets/Sign_out_square.svg" alt="Sign-out"
+                            style="width: 20px; height: 20px; margin-right: 5px;">
+                        Log Out
+                    </a>
+                </ul>
+            </a>
         </div>
     </nav>
 
@@ -92,10 +92,13 @@ checkAdminLogin();
             <h3 style="font-family: sub-font-bold">You have a current RFA Assignment</h3>
         </div>
 
-        <div class="col-md-5 d-flex justify-content-center align-items-center mt-5 mb-5">
-            <a href="rfa-assignment.php"><button class="btn btn-dark fw-bold" style="font-size: 1rem; padding: 8px; border-radius: 50px; ">
-                PROCEED TO ASSIGNMENT
-            </button></a>
+        <div class="col-md-5 d-flex justify-content-center align-items-center mt-4 mb-5">
+            <form action="rfa-assignment.php" method="POST">
+                <input type="hidden" name="referenceID" value="<?php echo $rfa['referenceID']; ?>" />
+                <button class="btn btn-dark fw-bold" style="font-size: 1rem; padding: 8px; border-radius: 50px;">
+                    PROCEED TO ASSIGNMENT
+                </button>
+            </form>
         </div>
     </div>
 

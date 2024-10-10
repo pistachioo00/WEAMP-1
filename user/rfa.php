@@ -64,50 +64,54 @@ checkRFA($accountID);
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #C80000;">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #C80000;">
         <div class="container">
             <a class="navbar-brand" href="../user/home.php">
-                <img src="../assets/WAO-Logo.svg" alt="Header-Title" class="img-fluid" style="width: 250px; height: 70px;">
+                <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 80px;">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="color: #FFFFFF;"></span>
+            <button style="width: 10%; height: 50%; background-color: #fff; border: none;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="color: #C80000;"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 mr-5">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #FFFFFF; font-weight: bold;" href="../user/home.php">Home</a>
+                        <a class="nav-link text-white" href="../user/home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #FFFFFF; font-weight: bold;" href="../user/rfa.php">RFA</a>
+                        <a class="nav-link text-white" href="../user/rfa.php">RFA</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #FFFFFF; font-weight: bold;" href="../user/dashboard-status.php">Dashboard</a>
+                        <a class="nav-link text-white" href="../user/dashboard-status.php">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #FFFFFF; font-weight: bold;" href="../user/about.php">About</a>
+                        <a class="nav-link text-white" href="../user/about.php">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #FFFFFF; font-weight: bold;" href="../user/contact-us.php">Contact</a>
+                        <a class="nav-link text-white" href="../user/contact-us.php">Contact</a>
                     </li>
-                    <div class="mx-4"></div>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
-                            <img src="../assets/Bell-Pin.svg" alt="Notification" style="width: 22px; height: 22px; margin-right: 8px;">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../user/my-account.php">
-                            <img src="../assets/User.svg" alt="My-Account" style="width: 22px; height: 22px; margin-right: 8px;">
-                            <span style="color: #FFFFFF; font-weight: bold;">My Account</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showLogoutConfirmation()">
-                            <img src="../assets/Sign_out_squre.svg" alt="Sign-out" style="width: 22px; height: 22px; margin-right: 8px;">
-                            <span style="color: #FFFFFF; font-weight: bold;">Log Out</span>
-                        </a>
-                    </li>
+                    <div class="mr-5"></div>
                 </ul>
+                <div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
+                                <img src="../assets/Bell_Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../user/my-account.php">
+                                <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
+                                My Account
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" onclick="showLogoutConfirmation()">
+                                <img src="../assets/Sign_out_square.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
+                                Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

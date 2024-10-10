@@ -66,7 +66,7 @@ checkAssignedRFA($adminID);
             <a href="#">
                 <ul class="navbar-nav ml-auto">
                     <a class="nav-link" href="../admin/admin-account.php">
-                        <img src="../assets/User-register.svg" alt="Register" style="width: 20px; height: 20px; margin-right: 5px;">
+                        <img src="../assets/User-Register.svg" alt="Register" style="width: 20px; height: 20px; margin-right: 5px;">
                         My Account
                     </a>
                     <a class="nav-link" href="../public/login.php">
@@ -98,7 +98,7 @@ checkAssignedRFA($adminID);
                 JOIN account acc ON rfa.accountID = acc.accountID
                 WHERE rfa.status = 'PENDING';";
                 
-        $stmt = $conn->prepare($sql);
+        $stmt = $conn->prepare($sql);   
         $stmt->execute();
         $result = $stmt->get_result();
         $rfa = $result->fetch_assoc();
@@ -122,7 +122,6 @@ checkAssignedRFA($adminID);
                 </thead>
                 <tbody>
                     <?php
-                    // Loop through the result set and display each row
                     while ($rfa = $result->fetch_assoc()) {
                         ?>
                     <tr>
@@ -142,16 +141,12 @@ checkAssignedRFA($adminID);
             </table>
     </section>
 
-
     <footer class="footer">
         <div class="container-footer">
             <p class="text-muted">Copyright 2024 © All Rights Reserved</br>
                 Worker’s Affairs Office</p>
         </div>
     </footer>
-
-
-
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>

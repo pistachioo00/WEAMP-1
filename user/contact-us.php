@@ -1,3 +1,4 @@
+<!-- PREVENT FROM ACCCESS NA NAKALOG OUT KA NA -->
 <?php
 include 'auth.php';
 checkLogin();
@@ -86,24 +87,28 @@ checkLogin();
                         <a class="nav-link" style="text-decoration: none; color: white;" href="../user/contact-us.php">Contact</a>
                     </li>
                     <div class="mr-5"></div>
-                    <li>
-                        <a class="nav-link" style="text-decoration: none; color: white;" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
-                            <img src="../assets/Bell_Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" style="text-decoration: none; color: white;" href="../user/my-account.php">
-                            <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
-                            My Account
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="text-decoration: none; color: white;" href="#" onclick="showLogoutConfirmation()">
-                            <img src="../assets/Sign_out_square.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
-                            Log Out
-                        </a>
-                    </li>
                 </ul>
+                <div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
+                                <img src="../assets/Bell_Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../user/my-account.php">
+                                <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
+                                My Account
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" onclick="showLogoutConfirmation()">
+                                <img src="../assets/Sign_out_square.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
+                                Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

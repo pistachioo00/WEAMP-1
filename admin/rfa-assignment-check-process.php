@@ -26,8 +26,8 @@ function checkAssignedRFA($adminID) {
             JOIN 
                 admin AS admin ON assign.adminID = admin.adminID  
             WHERE 
-                rfa.status = 'IN PROGRESS'
-            AND
+                rfa.status != 'PENDING' 
+            AND 
                 admin.adminID = ?;"; // Placeholder for adminID
               
     if ($stmt = $conn->prepare($sql)) {

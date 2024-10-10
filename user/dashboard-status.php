@@ -99,24 +99,28 @@ checkLogin();
                         <a class="nav-link" style="color: #FFFFFF;" href="../user/contact-us.php">Contact</a>
                     </li>
                     <div class="mr-5"></div>
-                    <li>
-                        <a class="nav-link" style="color: #FFFFFF;" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
-                            <img src="../assets/Bell_Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" style="color: #FFFFFF;" href="../user/my-account.php">
-                            <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
-                            My Account
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" style="color: #FFFFFF;" href="#" onclick="showLogoutConfirmation()">
-                            <img src="../assets/Sign_out_square.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
-                            Log Out
-                        </a>
-                    </li>
                 </ul>
+                <div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#collapseNotifications" aria-expanded="false" aria-controls="collapseNotifications">
+                                <img src="../assets/Bell_Pin.svg" alt="Notification" style="width: 20px; height: 20px; margin-right: 5px;">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="../user/my-account.php">
+                                <img src="../assets/User.svg" alt="My-Account" style="width: 20px; height: 20px; margin-right: 5px;">
+                                My Account
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" onclick="showLogoutConfirmation()">
+                                <img src="../assets/Sign_out_square.svg" alt="Sign-out" style="width: 20px; height: 20px; margin-right: 5px;">
+                                Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -152,43 +156,57 @@ checkLogin();
     $result = $stmt->get_result();
     $rfa = $result->fetch_assoc();
 
-    // Example complaint status
+    // Initialize variables to prevent undefined variable error
+    $status = '';
+    $message = '';
+    $progress = 0;
+    $class = 'bg-danger'; // default class
 
+    // Check if RFA exists
     if ($rfa) {
-        $status = $rfa['status']; // This can be 'Pending', 'Acknowledged', 'Completed', 'Closed Case'
+        $status = $rfa['status']; // This can be 'Pending', 'In Progress', 'Completed', 'Closed Case'
 
         switch ($status) {
             case 'PENDING':
                 $message = "Submitted RFA is subject for evaluation.";
                 $progress = 25;
-                $class = 'bg-warning';
                 break;
-            case 'In Progress':
+            case 'IN PROGRESS':
                 $message = "Your complaint is being processed. <br> Kindly wait for an invitation to proceed for an interview with our SEnA Desk Officer (SEADO).";
                 $progress = 50;
-                $class = 'bg-info';
+                break;
+            case 'REVIEWED':
+                $message = "Your complaint has been reviewed. Kindly wait for an approval.";
+                $progress = 60;
+                break;
+            case 'APPROVED':
+                $message = "Your complaint has been approved for further proceedings.";
+                $progress = 70;
+                break;
+            case 'SCHEDULED':
+                $message = "Your interview has been scheduled. Please check your email for the details.";
+                $progress = 80;
                 break;
             case 'COMPLETED':
                 $message = "Your complaint has been resolved.";
                 $progress = 75;
-                $class = 'bg-success';
                 break;
             case 'CLOSED CASE':
                 $message = "Your complaint case is closed.";
                 $progress = 100;
-                $class = 'bg-secondary';
                 break;
             default:
                 $message = "You have no submitted RFA. <br> Kindly make a request at the RFA.";
                 $progress = 0;
-                $class = 'bg-danger';
+                break;
         }
     } else {
-        $rfa['status'] = "NO RFA ENTRY";
+        $status = "NO RFA ENTRY"; // Assign default status
         $message = "You have no submitted entry of RFA. <br> Kindly make a request.";
     }
 
     ?>
+
 
     <section class="my-account-sec">
         <div class="container text-center">
@@ -200,11 +218,11 @@ checkLogin();
         <div class="card text-center" style="width: 500px;">
             <div class="card-body">
 
-                <h3 style="font-family: sub-font-bold;"><?php echo htmlspecialchars($rfa['status']); ?></h3>
+                <h3 style="font-family: sub-font-bold;">
+                    <?php echo isset($rfa['status']) ? htmlspecialchars($rfa['status']) : 'NO RFA ENTRY'; ?>
+                </h3>
                 <p class="card-text"><?php echo $message; ?></p>
-                <!-- <div class="progress">
-                                <div class="progress-bar <?php echo $class; ?>" role="progressbar" style="width: <?php echo $progress; ?>%;" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $progress; ?>%</div>
-                            </div> -->
+               
             </div>
         </div>
     </div>

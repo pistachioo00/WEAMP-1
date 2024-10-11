@@ -94,7 +94,7 @@
                 RFA Status
                 <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a href="../super-admin/articles/add-article.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <a href="../super-admin/articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
                 Articles and Seminar
                 <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>
@@ -135,7 +135,7 @@
                         style="width: 20px; height: 20px; margin-right: 5px;">
                     My Account
                 </a>
-                <a class="nav-link" href="logout.php" onclick="showLogoutConfirmation()" style="color: white">
+                <a class="nav-link" href="../logout.php" onclick="showLogoutConfirmation()" style="color: white">
                     <img src="../assets/User/Line1.svg" alt="Line"
                         style="width: 20px; height: 20px; margin-right: 5px;">
                     <img src="../assets/User/Sign_out_squre.svg" alt="Sign-out"

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Super Admin Login</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS  -->
@@ -40,8 +40,8 @@
                 </div>
 
                 <div class="col-12 text-center" style="margin-bottom: -10px;">
-                    <h1 class="display-2 mb-2" style="font-family: main-font; font-size: 3.5rem; margin-bottom: -5px; color: #1C05B3; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">WEMP</h1>
-                    <p class="display-2 mb-0" style="font-family: Arial, sans serif; font-size: 1.3rem; margin-top: -5px; color: #3682CC">Workers and Employers Management Platform</p>
+                    <h1 class="display-2 mb-2" style="font-family: main-font; font-size: 3.5rem; margin-bottom: -5px; color: #1C05B3; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">WEAMP</h1>
+                    <p class="display-2 mb-0" style="font-family: Arial, sans serif; font-size: 1.3rem; margin-top: -5px; color: #3682CC">Workers and Employers Affairs Management Platform</p>
                 </div>
 
             </div>
@@ -76,16 +76,11 @@
                     </div>
 
                     <div style="max-width: 400px; margin: 0 auto; padding-top: 3%;">
-                        <!--ayaw gumana nung login kaya nilagyan ko muna href >,<-->
-                        <button type="submit" style="background-color: #007BFF; color: white; font-family: Arial; padding: 2%; font-weight: bold; font-size: 16px; width: 100%;" class="btn btn-primary" onmouseover="this.style.backgroundColor='#0E72DE';" onmouseout="this.style.backgroundColor='#007BFF';">Sign in</button>
+                        <button type="submit" style="background-color: #304DA5; color: white; font-family: Arial; padding: 2%; font-weight: bold; font-size: 16px; width: 100%;" class="btn btn-primary" onmouseover="this.style.backgroundColor='#0E72DE';" onmouseout="this.style.backgroundColor='#007BFF';">Sign in</button>
                     </div>
 
                     <div class="form-group mb-3 text-center" style="max-width: 400px; margin: 0 auto;">
                         <a href="../super-admin/sa-forgot-password.php" style="color:#465DA3" class="btn btn-link">Forgot Password?</a>
-                    </div>
-
-                    <div style="max-width: 400px; margin: 0 auto;">
-                        <hr class="my-4" style="border: 1px solid #D9D9D9; width: 100%;">
                     </div>
                 </form>
             </div>
@@ -93,10 +88,8 @@
     </div>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </html>

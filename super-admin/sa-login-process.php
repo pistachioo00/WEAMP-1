@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (password_verify($password, $hashedPassword)) {
                 // Check if the adminID is 1
-                if ($row['adminID'] == 1) {
+                if ($row['adminID'] == 10) {
                     $_SESSION['username'] = $username;
                     $_SESSION['adminID'] = $row['adminID'];
                     // Redirect to sa-home.php

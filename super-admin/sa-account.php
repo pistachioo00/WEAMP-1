@@ -38,7 +38,7 @@
                             <a class="nav-link" href="../super-admin/sa-home.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../super-admin/sa-dashboard.php">Dashboard</a>
+                            <a class="nav-link" href="../super-admin/sa-dashboard.php">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../super-admin/sa-rfa-entries.php">RFA</a>

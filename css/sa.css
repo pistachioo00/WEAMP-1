@@ -219,7 +219,6 @@ section {
   pointer-events: none;
 }
 
-
 /*  */
 .heading {
   text-align: center;
@@ -370,6 +369,49 @@ section {
   color: var(--white);
 }
 
+/* Sidebar for Posting */
+.container {
+  overflow: hidden;
+}
+
+.sidebar {
+  display: none;
+  /* Initially hide the sidebar */
+  background-color: white;
+  border: 1.8px black solid;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1000;
+  transition: right 0.3s ease;
+}
+
+.sidebar.visible {
+  display: block;
+  /* Show the sidebar when visible class is added */
+}
+
+.mt-3 {
+  margin-top: 5rem;
+}
+
+.my-5 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 0;
+}
+
+/*  */
 .dashboard .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -594,6 +636,15 @@ section {
   padding: 1rem 0;
   white-space: pre-line;
 }
+
+.read-post form .link {
+  line-height: 1.5;
+  font-size: 1.8rem;
+  color: var(--light-color);
+  padding: 1rem 0;
+  white-space: pre-line;
+}
+
 
 .read-post form .icons {
   display: flex;

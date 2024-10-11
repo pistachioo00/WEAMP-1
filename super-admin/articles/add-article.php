@@ -6,11 +6,11 @@ session_start();
 
 $adminID = $_SESSION['adminID'];
 
-if (!isset($admin_id)) {
+if (!isset($adminID)) {
     header('location:sa-login.php');
 }
 
-if (isset($_POST['publish'])) {
+if (isset($_POST['Publish'])) {
 
     $title = $_POST['title'];
     $title = filter_var($title, FILTER_SANITIZE_STRING);
@@ -18,7 +18,7 @@ if (isset($_POST['publish'])) {
     $content = filter_var($content, FILTER_SANITIZE_STRING);
     $link = $_POST['link'];
     $link = filter_var($links, FILTER_SANITIZE_STRING);
-    $status = 'Active';
+    $status = 'Publish';
 
     $image = $_FILES['image']['name'];
     $image = filter_var($image, FILTER_SANITIZE_STRING);
@@ -48,41 +48,6 @@ if (isset($_POST['publish'])) {
         $insert_post->execute([$adminID, $title, $content, $link, $image, $video, $status]);
         $message[] = 'Post published!';
     }
-
-    $video = $_FILES['video']['name'];
-    $video = filter_var($video, FILTER_SANITIZE_STRING);
-    $video_size = $_FILES['video']['size'];
-    $video_tmp_name = $_FILES['video']['tmp_name'];
-    $video_folder = '../uploads/articleVideo/' . $video;
-
-    // Prepare a query to check if the video already exists for the same admin
-    $select_video = $conn->prepare("SELECT * FROM `posts` WHERE video = ? AND adminID = ?");
-    $select_video->execute([$video, $adminID]);
-
-    if (isset($video)) {
-        // Check if the video file already exists and if the file is not empty
-        if ($select_video->rowCount() > 0 and $video != '') {
-            $message[] = 'Video name repeated!';
-            // Check if the video file size exceeds the limit (example: 50MB = 50000000 bytes)
-        } elseif ($video_size > 60000000) {
-            $message[] = 'Video size is too large!';
-        } else {
-            // Move the uploaded video file to the target folder
-            move_uploaded_file($video_tmp_name, $video_folder);
-        }
-    } else {
-        // If no video was uploaded, set the video variable to an empty string
-        $video = '';
-    }
-
-    // After validation, insert the post details into the database
-    if ($select_video->rowCount() > 0 and $video != '') {
-        $message[] = 'Please rename your video!';
-    } else {
-        $insert_post = $conn->prepare("INSERT INTO `posts`(adminID, title, content, link, image, video, status) VALUES(?,?,?,?,?,?,?)");
-        $insert_post->execute([$adminID, $title, $content, $link, $image, $video, $status]);
-        $message[] = 'Post published!';
-    }
 }
 
 
@@ -94,7 +59,7 @@ if (isset($_POST['Draft'])) {
     $content = filter_var($content, FILTER_SANITIZE_STRING);
     $link = $_POST['link'];
     $link = filter_var($links, FILTER_SANITIZE_STRING);
-    $status = 'Deactive';
+    $status = 'Draft';
 
     $image = $_FILES['image']['name'];
     $image = filter_var($image, FILTER_SANITIZE_STRING);
@@ -120,47 +85,12 @@ if (isset($_POST['Draft'])) {
     if ($select_image->rowCount() > 0 and $image != '') {
         $message[] = 'Please rename your image!';
     } else {
-        $insert_post = $conn->prepare("INSERT INTO `posts`(adminID, title, content, link, image, video, status) VALUES(?,?,?,?,?,?,?)");
-        $insert_post->execute([$adminID, $title, $content, $link, $image, $video, $status]);
+        $insert_post = $conn->prepare("INSERT INTO `posts`(adminID, title, content, link, image, status) VALUES(?,?,?,?,?,?)");
+        $insert_post->execute([$adminID, $title, $content, $link, $image, $status]);
         $message[] = 'Draft saved!';
     }
 
-    $video = $_FILES['video']['name'];
-    $video = filter_var($video, FILTER_SANITIZE_STRING);
-    $video_size = $_FILES['video']['size'];
-    $video_tmp_name = $_FILES['video']['tmp_name'];
-    $video_folder = '../uploads/articleVideo/' . $video;
-
-    // Prepare a query to check if the video already exists for the same admin
-    $select_video = $conn->prepare("SELECT * FROM `posts` WHERE video = ? AND adminID = ?");
-    $select_video->execute([$video, $adminID]);
-
-    if (isset($video)) {
-        // Check if the video file already exists and if the file is not empty
-        if ($select_video->rowCount() > 0 and $video != '') {
-            $message[] = 'Video name repeated!';
-            // Check if the video file size exceeds the limit (example: 50MB = 50000000 bytes)
-        } elseif ($video_size > 60000000) {
-            $message[] = 'Video size is too large!';
-        } else {
-            // Move the uploaded video file to the target folder
-            move_uploaded_file($video_tmp_name, $video_folder);
-        }
-    } else {
-        // If no video was uploaded, set the video variable to an empty string
-        $video = '';
-    }
-
-    // After validation, insert the post details into the database
-    if ($select_video->rowCount() > 0 and $video != '') {
-        $message[] = 'Please rename your video!';
-    } else {
-        $insert_post = $conn->prepare("INSERT INTO `posts`(adminID, title, content, link, image, video, status) VALUES(?,?,?,?,?,?,?)");
-        $insert_post->execute([$adminID, $title, $content, $link, $image, $video, $status]);
-        $message[] = 'Draft saved!';
-    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -176,14 +106,14 @@ if (isset($_POST['Draft'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="../css/sa.css">
 
 </head>
 
 <body>
 
 
-    <?php include '../components/admin_header.php' ?>
+    <?php include '../components/admin-header.php' ?>
 
     <section class="post-editor">
 
@@ -206,12 +136,6 @@ if (isset($_POST['Draft'])) {
                 <input type="submit" value="publish post" name="publish" class="btn">
                 <input type="submit" value="save draft" name="draft" class="option-btn">
             </div>
-            <p>Post Video</p>
-            <input type="file" name="video" class="box" accept="video/mp4, video/ogg, video/webm">
-            <div class="flex-btn">
-                <input type="submit" value="publish post" name="publish" class="btn">
-                <input type="submit" value="save draft" name="draft" class="option-btn">
-            </div>
         </form>
 
     </section>
@@ -226,7 +150,7 @@ if (isset($_POST['Draft'])) {
 
 
     <!-- custom js file link  -->
-    <script src="../js/admin_script.js"></script>
+    <script src="../js/super-admin.js"></script>
 
 </body>
 

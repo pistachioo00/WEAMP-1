@@ -1,8 +1,13 @@
 <?php
-require_once '../super-admin/components/config.php';
+require_once '../public/config.php';
 
 session_start();
 
+/* //Enable report for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';

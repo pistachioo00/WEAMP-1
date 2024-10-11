@@ -77,7 +77,7 @@
 
                     <div style="max-width: 400px; margin: 0 auto; padding-top: 3%;">
                         <!--ayaw gumana nung login kaya nilagyan ko muna href >,<-->
-                        <a href="../super-admin/sa-home.php" button type="submit" style="background-color: #007BFF; color: white; font-family: Arial; padding: 2%; font-weight: bold; font-size: 16px; width: 100%;" class="btn btn-primary" onmouseover="this.style.backgroundColor='#0E72DE';" onmouseout="this.style.backgroundColor='#007BFF';">Sign in</a>
+                        <button type="submit" style="background-color: #007BFF; color: white; font-family: Arial; padding: 2%; font-weight: bold; font-size: 16px; width: 100%;" class="btn btn-primary" onmouseover="this.style.backgroundColor='#0E72DE';" onmouseout="this.style.backgroundColor='#007BFF';">Sign in</button>
                     </div>
 
                     <div class="form-group mb-3 text-center" style="max-width: 400px; margin: 0 auto;">

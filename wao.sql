@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2024 at 04:36 PM
+-- Generation Time: Oct 16, 2024 at 04:50 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -75,7 +75,8 @@ INSERT INTO `account` (`accountID`, `fullName`, `email`, `region`, `province`, `
 (20, 'bebulove', 'bebulove@gmail.com', 'NCR', 'NCR', 'NCR', 'NCR', 'Pasolo', 'wer', 'Individual', 'fsdfsd', 3, '2024-09-03', 'bebulove', '2385453463', '$2y$10$xdfgZbz.Z6/YYczI7crToOOxLTEYiV4tgQ0Oya8VWzQnrcgLpc0oG', NULL, NULL),
 (22, 'Nathaniel T. Sabellano', 'wheredorosesbloom@gmail.com', 'NCR', 'Metro Manila', 'CITY OF VALENZUELA', 'Karuhatan', 'Block 1 Lot 22 Phase 4 Assumption Ville', 'Content Creator', 'Union Representative', 'Streaming', 5, '2024-08-28', 'pookiebear', '9547863214', '$2y$10$08LtLgIcWCysEls2Vqr8cul9jeexD0IFOZ9kTOT.P14gCPfoYCmai', 'SELFIE-66e23f5244dd69.14723477.jpg', 'ID-66e23f52450434.71546036.jpg'),
 (23, 'Mhia Rose Balleras Baguanga', 'mhiarosebaguanga1@gmail.com', 'NCR', 'Metro Manila', 'CITY OF VALENZUELA', 'Karuhatan', 'Block 1 Lot 22 Phase 4 Assumption Ville', 'PRETTY', 'Union Representative', 'Maganda', 21, '2024-09-19', 'akoaypretty', '1222222222', '$2y$10$qSopfMsLb1gNP/G/x.Dxd.bkKawaZBf0FdrNuuPuNd.t0FbGOMxNy', 'SELFIE-66e6f911d2ad65.44803174.jpg', 'ID-66e6f911d30455.11234708.jpg'),
-(24, 'Nightmare Cat', 'wheredorosesbloom@gmail.com', 'Cage', 'Square', 'Black', 'Tall', '123 Cat Litter', 'Cute', 'Individual', 'Homestay', 1, '2024-09-25', 'nightmarecat', '1546684566', '$2y$10$.2lIKCMSk2cBsuTlcJHlWu.QzqvVSTh1t6hK2A.mbI/Tq1PXGeDNS', 'SELFIE-66e7831f261703.26878578.jpg', 'ID-66e7831f266846.52109704.jpg');
+(24, 'Nightmare Cat', 'wheredorosesbloom@gmail.com', 'Cage', 'Square', 'Black', 'Tall', '123 Cat Litter', 'Cute', 'Individual', 'Homestay', 1, '2024-09-25', 'nightmarecat', '1546684566', '$2y$10$.2lIKCMSk2cBsuTlcJHlWu.QzqvVSTh1t6hK2A.mbI/Tq1PXGeDNS', 'SELFIE-66e7831f261703.26878578.jpg', 'ID-66e7831f266846.52109704.jpg'),
+(26, 'hannah', 'hannahracelis.19@gmail.com', 'NCR', 'Metro Manila', 'Valenzuela City', 'Karuhatan', '25 Faith Bible st.', 'Sales', 'Individual', 'Sales Worker', 2, '2022-10-12', 'tobipogi', '9554574359', '$2y$10$rFIglWECLqxYxCfM789hWuu6x2YwygNWERr0XPvMO8EFE.uTyZ4YC', 'SELFIE-6707fa2dd65db8.80636475.jpg', 'ID-6707fa2dd6a2d7.79752857.jpg');
 
 -- --------------------------------------------------------
 
@@ -97,13 +98,15 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminID`, `fullName`, `email`, `username`, `password`, `role`) VALUES
-(2, 'Hayami Exotic', 'hayami@gmail.com', 'hayami', '$2y$10$4NmtDj.J1PCYt0wGKxAwnurXFeLHu3MuJ140JgLLk8mXkRTpd4G0q', 'Super Admin'),
+(1, 'Tobiya Racelis', 'tobi@gmail.com', 'tobicute', 'tobicute', 'Super Admin'),
+(2, 'Hayami Exotic', 'hayami@gmail.com', 'hayami', 'hayami123', 'Admin'),
 (3, 'Andrei John Camposano', 'aandreijohn@gmail.com', 'aandreijohn', '$2y$10$s.VemAFFiW2xt1j5vsxDE.CBtw1KlKMfrga4sLZsyBgfX3rBPl56O', 'Admin'),
 (4, 'Mhia Rose Baguanga', 'mhiarosebaguanga1@gmail.com', 'mhiarosebaguanga1', '$2y$10$omX34XerpMgY7rlLb2Q0rOvCeQAkvD00OtivhxGiOsQKun2nzCNiW', 'Admin'),
 (5, 'Mikaela Roisa Pring', 'pringmikaelaroisa48@gmail.com', 'pringmikaelaroisa48', '$2y$10$76M5FsSDBzF/9iQE19qRieTl6nu5KB8GVbhTgBiRMDD7SMj8jL19K', 'Admin'),
 (6, 'Hannah Erika Racelis', 'hannahracelis.19@gmail.com', 'hannahracelis.19', '$2y$10$bjDjnygkyd3tBN5PldfCiuqBXgRlosmQUhJeG2fkLJjGUGfD/lPie', 'Admin'),
 (7, 'AJ Camposano', 'ndreiic@gmail.com', 'ndreiica', '$2y$10$nv42aIxF7dnjqq9QUMKT9O8sNRfZlvKZLPHSJ7JRQtoVMG6Wgc0wi', 'Admin'),
-(8, 'Kenmar Bernadino', 'kenbernardino@gmail.com', 'kenbernardino123', '$2y$10$u/d95Jq6gSlRnrsDqnAG3OnNvcQG78BK2zmzgKvQ2.p3dkgM9K8JG', 'Admin');
+(8, 'Kenmar Bernadino', 'kenbernardino@gmail.com', 'kenbernardino123', '$2y$10$u/d95Jq6gSlRnrsDqnAG3OnNvcQG78BK2zmzgKvQ2.p3dkgM9K8JG', 'Admin'),
+(10, 'Bjorn Pogi', 'bjorn@gmail.com', 'jonathan', '$2y$10$PdfvLocV6CjxtnZOPW8LuuLlG8o2srA8lZgja6okQFVLart9gWNJW', 'Super Admin');
 
 -- --------------------------------------------------------
 
@@ -159,6 +162,30 @@ INSERT INTO `claims` (`claimsID`, `claimsCode`, `claimsName`) VALUES
 (5, 'CED', 'Certification Election Dispute'),
 (6, 'IUD', 'Inter/Intra Union Dispute'),
 (7, 'CUR', 'Cancellation of Union Registration');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `postID` int(15) NOT NULL,
+  `adminID` int(10) NOT NULL,
+  `postTitle` varchar(100) NOT NULL,
+  `postContent` longtext NOT NULL,
+  `postLink` varchar(255) NOT NULL,
+  `postImage` varchar(200) NOT NULL,
+  `postDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `postStatus` enum('Publish','Draft') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`postID`, `adminID`, `postTitle`, `postContent`, `postLink`, `postImage`, `postDate`, `postStatus`) VALUES
+(1, 10, 'trial', 'trial kuno', 'http://localhost/bloggingWeb/project/admin/dashboard.php', 'Opera Snapshot_2024-10-11_204813_localhost.png', '2024-10-12 02:13:53', 'Publish');
 
 -- --------------------------------------------------------
 
@@ -274,6 +301,12 @@ ALTER TABLE `claims`
   ADD PRIMARY KEY (`claimsID`);
 
 --
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`postID`);
+
+--
 -- Indexes for table `reliefs`
 --
 ALTER TABLE `reliefs`
@@ -299,13 +332,13 @@ ALTER TABLE `testing`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `adminID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `assignment`
@@ -318,6 +351,12 @@ ALTER TABLE `assignment`
 --
 ALTER TABLE `claims`
   MODIFY `claimsID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `postID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reliefs`

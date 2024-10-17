@@ -161,7 +161,7 @@
                         <h4 class="fw-bold mt-2">RFA ENTRIES</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0;  padding-right: 30%; color: #465DA3; ">2</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_new_entries.svg" alt="" style="max-width: 50%; padding-left: 10px; padding-top: 9%"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_new_entries.svg" alt="" style="max-width: 50%; padding-left: 10px; padding-top: 6%"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                         <h4 class="fw-bold mt-2">SENA CONFERENCE</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0; padding-right: 34%; color: #465DA3">2</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_conference.svg" alt="" style="max-width: 150%; padding-left: 10px; padding-top: 9%"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_conference.svg" alt="" style="max-width: 150%; padding-left: 10px; padding-top: 8%"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                         <h4 class="fw-bold mt-2">ADVICE & COUNSELLING</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0;  padding-right: 32%">1</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_advice.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 7%"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_advice.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 4px"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                         <h4 class="fw-bold mt-2">SETTLED CASES</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0;  padding-right: 34%">2</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_settled.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 10%"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_settled.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 8%"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>
@@ -223,7 +223,7 @@
                         <h4 class="fw-bold mt-2">WITHDRAWALS</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0;  padding-right: 33%">1</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_withdrawals.svg" alt="" style="max-width: 100%; padding-left: 10px; padding-top: 8%"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_withdrawals.svg" alt="" style="max-width: 100%; padding-left: 10px; padding-top: 7%"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>

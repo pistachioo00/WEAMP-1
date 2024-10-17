@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article posting</title>
+    <title>Seminars</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -13,51 +13,6 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <style>
-    .tool-list {
-        display: flex;
-        flex-flow: row nowrap;
-        list-style: none;
-        padding: 0;
-        overflow: hidden;
-        gap: 10px;
-        border-radius: 5px;
-        background-color: white;
-        justify-content: end;
-        margin-right: 10%;
-    }
-
-    .tool--btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: none;
-        border-radius: 5px;
-        height: 20px;
-        width: 20px;
-        font-size: 12px;
-        cursor: pointer;
-        background-color: transparent;
-    }
-
-    .tool--btn img {
-        width: 100%;
-        height: 100%;
-        vertical-align: middle;
-    }
-
-    .tool--btn:hover {
-        background-color: #dddddd;
-    }
-
-    #output {
-        height: 400px;
-        padding: 1rem;
-        width: 90%;
-        border: 1px solid #333;
-        border-radius: 5px;
-        background-color: white;
-    }
-
     .navbar-nav .nav-item .nav-link {
         color: white;
     }
@@ -148,29 +103,3 @@
             </div>
         </nav>
     </div>
-
-    <section class="post-editor" style="padding-bottom: 15%">
-        <h1 class="heading">Add new post</h1>
-        <form action="../articles/add-post-process.php" method="post" enctype="multipart/form-data">
-            <p>Post Title <span style="color:#C80000;">*</span></p>
-            <input type="text" name="postTitle" maxlength="100" required placeholder="Add post title" class="box-post">
-            <p>Post Content <span style="color:#C80000;">*</span></p>
-            <textarea name="postContent" class="box-post" required maxlength="20000" placeholder="Write your content..." cols="30" rows="10"></textarea>
-            <p>Post Link</p>
-            <input type="url" name="postLink" class="box-post">
-            <p>Post Image</p>
-            <input type="file" name="postImage" class="box-post">
-            <div class="flex-btn">
-                <input type="submit" value="Publish Post" name="publish" class="btn">
-                <input type="submit" value="Save Draft" name="draft" class="option-btn">
-            </div>
-        </form>
-    </section>
-
-
-    <!-- custom js file link  -->
-    <script src="../js/super-admin.js"></script>
-
-</body>
-
-</html>

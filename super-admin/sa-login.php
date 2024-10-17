@@ -24,6 +24,7 @@
             height: 20px;
             pointer-events: none;
         }
+
     </style>
 </head>
 
@@ -40,8 +41,8 @@
                 </div>
 
                 <div class="col-12 text-center" style="margin-bottom: -10px;">
-                    <h1 class="display-2 mb-2" style="font-family: main-font; font-size: 3.5rem; margin-bottom: -5px; color: #1C05B3; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">WEAMP</h1>
-                    <p class="display-2 mb-0" style="font-family: Arial, sans serif; font-size: 1.3rem; margin-top: -5px; color: #3682CC">Workers and Employers Affairs Management Platform</p>
+                    <h1 class="display-2 mb-2" style="font-family: main-font; font-size: 3.5rem; margin-bottom: -5px; color: #C80000; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">WEAMP</h1>
+                    <p class="display-2 mb-0" style="font-family: Arial, sans serif; font-size: 1.3rem; margin-top: -5px; color: #C80000">Workers and Employers Affairs Management Platform</p>
                 </div>
 
             </div>
@@ -80,7 +81,7 @@
                     </div>
 
                     <div class="form-group mb-3 text-center" style="max-width: 400px; margin: 0 auto;">
-                        <a href="../super-admin/sa-forgot-password.php" style="color:#465DA3" class="btn btn-link">Forgot Password?</a>
+                        <a href="../super-admin/sa-forgot-password.php" style="background-color:#465DA3" class="btn btn-link">Forgot Password?</a>
                     </div>
                 </form>
             </div>

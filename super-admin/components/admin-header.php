@@ -42,11 +42,11 @@ if (isset($message)) {
     </div>
 
     <nav class="navbar">
-        <a href="../posting-dashboard.php"><i class="fas fa-home"></i> <span>home</span></a>
-        <a href="../add-posts.php"><i class="fas fa-pen"></i> <span>add posts</span></a>
-        <a href="view_posts.php"><i class="fas fa-eye"></i> <span>view posts</span></a>
-        <a href="../sa-account.php"><i class="fas fa-user"></i> <span>accounts</span></a>
-        <a href="../logout.php" style="color:var(--red);" onclick="return confirm('logout from the website?');"><i class="fas fa-right-from-bracket"></i><span>logout</span></a>
+        <a href="../posting-dashboard.php"><i class="fas fa-home"></i> <span>Home</span></a>
+        <a href="../add-post.php"><i class="fas fa-pen"></i> <span>Add posts</span></a>
+        <a href="../view-post.php"><i class="fas fa-eye"></i> <span>View posts</span></a>
+        <a href="../sa-account.php"><i class="fas fa-user"></i> <span>Accounts</span></a>
+        <a href="../logout.php" style="color:var(--red);" onclick="return confirm('Logout from the website?');"><i class="fas fa-right-from-bracket"></i><span>Logout</span></a>
     </nav>
 
 </header>

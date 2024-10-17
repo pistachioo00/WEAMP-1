@@ -2,116 +2,212 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/bk_WEAMP/WEAMP/public/config.php';
 
-
 session_start();
 
 $adminID = $_SESSION['adminID'];
 
 if (!isset($adminID)) {
-   header('location:sa-home.php');
+   header('location:../super-admin/sa-home.php');
 }
 
-if(isset($_POST['delete'])){
+if (isset($_POST['delete'])) {
+   $postID = $_POST['postID'];
+   $postID = filter_var($postID, FILTER_SANITIZE_STRING);
 
-   $p_id = $_POST['post_id'];
-   $p_id = filter_var($p_id, FILTER_SANITIZE_STRING);
-   $delete_image = $conn->prepare("SELECT * FROM `posts` WHERE id = ?");
-   $delete_image->execute([$p_id]);
-   $fetch_delete_image = $delete_image->fetch(PDO::FETCH_ASSOC);
-   if($fetch_delete_image['image'] != ''){
-      unlink('../uploaded_img/'.$fetch_delete_image['image']);
+   // Use MySQLi syntax
+   $delete_postImage = $conn->prepare("SELECT postImage FROM `posts` WHERE postID = ?");
+   $delete_postImage->bind_param('i', $postID);
+   $delete_postImage->execute();
+   $result = $delete_postImage->get_result();
+   $fetch_delete_postImage = $result->fetch_assoc();
+
+   if ($fetch_delete_postImage['postImage'] != '') { // Corrected to match the selected column
+      $postImage_path = '../../uploads/articleImages/' . $fetch_delete_postImage['postImage']; // Corrected image path handling
+      if (file_exists($postImage_path)) { // Corrected variable usage
+         unlink($postImage_path);
+      }
    }
-   $delete_post = $conn->prepare("DELETE FROM `posts` WHERE id = ?");
-   $delete_post->execute([$p_id]);
-   $delete_comments = $conn->prepare("DELETE FROM `comments` WHERE post_id = ?");
-   $delete_comments->execute([$p_id]);
-   $message[] = 'post deleted successfully!';
 
+   // Delete the post from the database
+   $delete_post = $conn->prepare("DELETE FROM `posts` WHERE postID = ?");
+   $delete_post->bind_param('i', $postID);
+   $delete_post->execute();
+
+   $message[] = 'Post deleted successfully!';
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>posts</title>
+   <title>Posts</title>
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="../css/admin_style.css">
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+   <link rel="stylesheet" href="../../css/sa.css">
+   <link rel="stylesheet" href="../../css/styles.css">
 
 </head>
+<style>
+   .navbar-nav .nav-item .nav-link {
+      color: white;
+   }
+
+   .rectangle {
+      background-color: white;
+      border: 2.5px solid #146fca;
+   }
+
+   .rectangle h4 {
+      font-family: sub-font-bold;
+      color: #304da5;
+   }
+
+   .rectangle h1 {
+      margin-bottom: 0;
+      padding-right: 35%;
+      color: #465da3;
+   }
+</style>
+
 <body>
-
-<?php include '../components/admin_header.php' ?>
-
-<section class="show-posts">
-
-   <h1 class="heading">your posts</h1>
-
-   <div class="box-container">
-
-      <?php
-         $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE admin_id = ?");
-         $select_posts->execute([$admin_id]);
-         if($select_posts->rowCount() > 0){
-            while($fetch_posts = $select_posts->fetch(PDO::FETCH_ASSOC)){
-               $post_id = $fetch_posts['id'];
-
-               $count_post_comments = $conn->prepare("SELECT * FROM `comments` WHERE post_id = ?");
-               $count_post_comments->execute([$post_id]);
-               $total_post_comments = $count_post_comments->rowCount();
-
-               $count_post_likes = $conn->prepare("SELECT * FROM `likes` WHERE post_id = ?");
-               $count_post_likes->execute([$post_id]);
-               $total_post_likes = $count_post_likes->rowCount();
-
-      ?>
-      <form method="post" class="box">
-         <input type="hidden" name="post_id" value="<?= $post_id; ?>">
-         <?php if($fetch_posts['image'] != ''){ ?>
-            <img src="../uploaded_img/<?= $fetch_posts['image']; ?>" class="image" alt="">
-         <?php } ?>
-         <div class="status" style="background-color:<?php if($fetch_posts['status'] == 'active'){echo 'limegreen'; }else{echo 'coral';}; ?>;"><?= $fetch_posts['status']; ?></div>
-            <div class="title"><?= $fetch_posts['title']; ?></div>
-         <div class="posts-content"><?= $fetch_posts['content']; ?></div>
-         <div class="icons">
-            <div class="likes"><i class="fas fa-heart"></i><span><?= $total_post_likes; ?></span></div>
-            <div class="comments"><i class="fas fa-comment"></i><span><?= $total_post_comments; ?></span></div>
-         </div>
-         <div class="flex-btn">
-            <a href="edit_post.php?id=<?= $post_id; ?>" class="option-btn">edit</a>
-            <button type="submit" name="delete" class="delete-btn" onclick="return confirm('delete this post?');">delete</button>
-         </div>
-         <a href="read_post.php?post_id=<?= $post_id; ?>" class="btn">view post</a>
-      </form>
-      <?php
-            }
-         }else{
-            echo '<p class="empty">no posts added yet! <a href="add_posts.php" class="btn" style="margin-top:1.5rem;">add post</a></p>';
-         }
-      ?>
-
+   <!-- Sidebar -->
+   <div class="sidebar mt-5" style="background-color: #FFE5E5; border: 1.8px grey solid">
+      <div class="container my-4">
+         <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:35%; color: #304DA5;">Article Posting</h3>
+         <hr style="background-color: black;">
+         <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            Dashboard
+         </a>
+         <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <img src="../../assets/posting-pen.svg" alt="posting_pen">
+            Add posts
+         </a>
+         <a href="../articles/view-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <img src="../../assets/view-eye.svg" alt="expand_right">
+            View posts
+         </a>
+         <a href="../articles/seminar.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <img src="../../assets/seminars.svg" alt="expand_right">
+            Seminars
+         </a>
+      </div>
    </div>
 
+   <!-- Main content -->
+   <div class="main-content">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #C80000;">
+         <div class="container">
+            <a class="navbar-brand" href="#">
+               <img src="../../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 70px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
+               <ul class="nav nav-underline navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
+                  <li class="nav-item">
+                     <a class="nav-link" href="../sa-home.php">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link active" aria-current="page" href="../sa-dashboard.php">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="../sa-rfa-entries.php">RFA</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="../sa-sena-records.php">Records</a>
+                  </li>
+               </ul>
+            </div>
+            <a href="#">
+               <ul class="navbar-nav ml-auto">
+            </a>
+            <a class="nav-link" href="../sa-account.php" style="color: white">
+               <img src="../../assets/User/User.svg" alt="My-Account"
+                  style="width: 20px; height: 20px; margin-right: 5px;">
+               My Account
+            </a>
+            <a class="nav-link" href="../logout.php" onclick="showLogoutConfirmation()" style="color: white">
+               <img src="../../assets/User/Line1.svg" alt="Line"
+                  style="width: 20px; height: 20px; margin-right: 5px;">
+               <img src="../../assets/User/Sign_out_squre.svg" alt="Sign-out"
+                  style="width: 20px; height: 20px; margin-right: 5px;">
+               Log Out
+            </a>
+         </div>
+      </nav>
+   </div>
+   <!-- Main content -->
+   <br><br><br>
+   <h1 class="heading">Your posts</h1>
 
-</section>
+   <section class="post-section">
+      <div class="box-container">
 
+         <?php
+         // Selecting posts based on adminID
+         $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ?");
+         $select_posts->bind_param('i', $adminID); // Bind adminID as an integer
+         $select_posts->execute();
+         $result = $select_posts->get_result();
 
+         // Check if there are posts available
+         if ($result->num_rows > 0) {
+            while ($fetch_posts = $result->fetch_assoc()) {
+               $postID = $fetch_posts['postID'];
+               $postImage = htmlspecialchars($fetch_posts['postImage']); // Fetch post image uniquely for each post
+         ?>
+               <form method="post" class="box">
+                  <input type="hidden" name="post_id" value="<?= $postID; ?>">
 
+                  <!-- Display the post image if available -->
+                  <?php if (!empty($postImage)) { ?>
+                     <img src="../../uploads/articleImages/<?= $postImage; ?>" class="image"
+                        alt="Post Image" style="width:200px;height:auto;" data-bs-toggle="modal"
+                        data-bs-target="#postImageModal">
+                  <?php } ?>
 
+                  <!-- Post status with color coding -->
+                  <div class="status" style="background-color:<?php
+                                                               echo ($fetch_posts['postStatus'] == 'publish') ? 'limegreen' : 'coral';
+                                                               ?>;">
+                     <?= $fetch_posts['postStatus']; ?>
+                  </div>
 
+                  <!-- Post details -->
+                  <div class="title"><?= htmlspecialchars($fetch_posts['postTitle']); ?></div>
+                  <div class="posts-content"><?= htmlspecialchars($fetch_posts['postContent']); ?></div>
+                  <div class="posts-link"><?= htmlspecialchars($fetch_posts['postLink']); ?></div>
 
+                  <!-- Action buttons -->
+                  <div class="flex-btn">
+                     <a href="../articles/edit-post.php?postID=<?= $postID; ?>" class="option-btn">Edit</a>
+                     <button type="submit" name="delete" class="delete-btn"
+                        onclick="return confirm('Delete this post?');">Delete</button>
+                  </div>
+                  <a href="../articles/read-post.php?postID=<?= $postID; ?>" class="btn">View post</a>
+               </form>
+         <?php
+            }
+         } else {
+            echo '<p class="empty">No posts added yet! <a href="../articles/add-post.php" class="btn" style="margin-top:1.5rem;">Add post</a></p>';
+         }
+         ?>
 
+      </div>
+   </section>
 
-
-<!-- custom js file link  -->
-<script src="../js/admin_script.js"></script>
-
+   <!-- custom js file link  -->
+   <script src="../js/super-admin.js"></script>
 </body>
+
 </html>

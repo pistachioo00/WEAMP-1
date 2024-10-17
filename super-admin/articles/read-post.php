@@ -2,7 +2,6 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/bk_WEAMP/WEAMP/public/config.php';
 
-
 session_start();
 
 $adminID = $_SESSION['adminID'];
@@ -11,146 +10,89 @@ if (!isset($adminID)) {
    header('location:sa-home.php');
 }
 
-$get_id = $_GET['post_id'];
+$get_id = $_GET['postID'];
 
-if(isset($_POST['delete'])){
+if (isset($_POST['delete'])) {
 
-   $p_id = $_POST['post_id'];
-   $p_id = filter_var($p_id, FILTER_SANITIZE_STRING);
-   $delete_image = $conn->prepare("SELECT * FROM `posts` WHERE id = ?");
-   $delete_image->execute([$p_id]);
-   $fetch_delete_image = $delete_image->fetch(PDO::FETCH_ASSOC);
-   if($fetch_delete_image['image'] != ''){
-      unlink('../uploaded_img/'.$fetch_delete_image['image']);
+   $postID = $_POST['postID'];
+   $postID = filter_var($postID, FILTER_SANITIZE_STRING);
+
+   // Get post image for deletion
+   $delete_postImage = $conn->prepare("SELECT * FROM `posts` WHERE postID = ?");
+   $delete_postImage->execute([$postID]);
+   $fetch_delete_postImage = $delete_postImage->fetch(PDO::FETCH_ASSOC); // Corrected fetch
+
+   if (!empty($fetch_delete_postImage['postImage'])) { // Corrected image handling
+      unlink('../../uploads/articleImages/' . $fetch_delete_postImage['postImage']);
    }
-   $delete_post = $conn->prepare("DELETE FROM `posts` WHERE id = ?");
-   $delete_post->execute([$p_id]);
-   $delete_comments = $conn->prepare("DELETE FROM `comments` WHERE post_id = ?");
-   $delete_comments->execute([$p_id]);
-   header('location:view_posts.php');
 
-}
+   // Delete the post
+   $delete_post = $conn->prepare("DELETE FROM `posts` WHERE postID = ?");
+   $delete_post->execute([$postID]);
 
-if(isset($_POST['delete_comment'])){
-
-   $comment_id = $_POST['comment_id'];
-   $comment_id = filter_var($comment_id, FILTER_SANITIZE_STRING);
-   $delete_comment = $conn->prepare("DELETE FROM `comments` WHERE id = ?");
-   $delete_comment->execute([$comment_id]);
-   $message[] = 'comment delete!';
-
+   header('location:../../articles/view-post.php');
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>posts</title>
-
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
+   <title>Posts</title>
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+   <!-- <link rel="stylesheet" href="../../css/sa.css"> -->
+   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="../css/admin_style.css">
+   <link rel="stylesheet" href="../../css/styles.css">
 
 </head>
+
 <body>
 
-<?php include '../components/admin_header.php' ?>
+   <section class="read-post">
 
-<section class="read-post">
+      <?php
+      // Fetch post data
+      $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postID = ?");
+      $select_posts->execute([$adminID, $get_id]);
 
-   <?php
-      $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE admin_id = ? AND id = ?");
-      $select_posts->execute([$admin_id, $get_id]);
-      if($select_posts->rowCount() > 0){
-         while($fetch_posts = $select_posts->fetch(PDO::FETCH_ASSOC)){
-            $post_id = $fetch_posts['id'];
-
-            $count_post_comments = $conn->prepare("SELECT * FROM `comments` WHERE post_id = ?");
-            $count_post_comments->execute([$post_id]);
-            $total_post_comments = $count_post_comments->rowCount();
-
-            $count_post_likes = $conn->prepare("SELECT * FROM `likes` WHERE post_id = ?");
-            $count_post_likes->execute([$post_id]);
-            $total_post_likes = $count_post_likes->rowCount();
-
-   ?>
-   <form method="post">
-      <input type="hidden" name="post_id" value="<?= $post_id; ?>">
-      <div class="status" style="background-color:<?php if($fetch_posts['status'] == 'active'){echo 'limegreen'; }else{echo 'coral';}; ?>;"><?= $fetch_posts['status']; ?></div>
-      <?php if($fetch_posts['image'] != ''){ ?>
-         <img src="../uploaded_img/<?= $fetch_posts['image']; ?>" class="image" alt="">
-      <?php } ?>
-      <div class="title"><?= $fetch_posts['title']; ?></div>
-      <div class="content"><?= $fetch_posts['content']; ?></div>
-      <div class="icons">
-         <div class="likes"><i class="fas fa-heart"></i><span><?= $total_post_likes; ?></span></div>
-         <div class="comments"><i class="fas fa-comment"></i><span><?= $total_post_comments; ?></span></div>
-      </div>
-      <div class="flex-btn">
-         <a href="edit_post.php?id=<?= $post_id; ?>" class="inline-option-btn">edit</a>
-         <button type="submit" name="delete" class="inline-delete-btn" onclick="return confirm('delete this post?');">delete</button>
-         <a href="view_posts.php" class="inline-option-btn">go back</a>
-      </div>
-   </form>
-   <?php
-         }
-      }else{
-         echo '<p class="empty">no posts added yet! <a href="add_posts.php" class="btn" style="margin-top:1.5rem;">add post</a></p>';
+      if ($select_posts->rowCount() > 0) {
+         $fetch_posts = $select_posts->fetch(PDO::FETCH_ASSOC); // Fetch single post
+         $postID = $fetch_posts['postID'];
+      } else {
+         echo '<p>No post found!</p>';
       }
-   ?>
-
-</section>
-
-<section class="comments" style="padding-top: 0;">
-   
-   <p class="comment-title">post comments</p>
-   <div class="box-container">
-   <?php
-         $select_comments = $conn->prepare("SELECT * FROM `comments` WHERE post_id = ?");
-         $select_comments->execute([$get_id]);
-         if($select_comments->rowCount() > 0){
-            while($fetch_comments = $select_comments->fetch(PDO::FETCH_ASSOC)){
       ?>
-   <div class="box">
-      <div class="user">
-         <i class="fas fa-user"></i>
-         <div class="user-info">
-            <span><?= $fetch_comments['user_name']; ?></span>
-            <div><?= $fetch_comments['date']; ?></div>
+      <form method="post">
+         <input type="hidden" name="postID" value="<?= $postID; ?>">
+         <div class="status" style="background-color:<?php if ($fetch_posts['postStatus'] == 'publish') {
+                                                         echo 'limegreen';
+                                                      } else {
+                                                         echo 'coral';
+                                                      }; ?>;"><?= $fetch_posts['postStatus']; ?></div>
+         <?php if (!empty($fetch_posts['postImage'])) { ?>
+            <img src="../../uploads/articleImages/<?= $fetch_posts['postImage']; ?>" class="image" alt="">
+         <?php } ?>
+         <div class="title"><?= $fetch_posts['postTitle']; ?></div>
+         <div class="content"><?= $fetch_posts['postContent']; ?></div>
+         <div class="link"><?= $fetch_posts['postLink']; ?></div>
+         <div class="flex-btn">
+            <a href="../../articles/edit-post.php?id=<?= $postID; ?>" class="inline-option-btn">Edit</a>
+            <button type="submit" name="delete" class="inline-delete-btn" onclick="return confirm('Delete this post?');">Delete</button>
+            <a href="../../articles/view-post.php" class="inline-option-btn">Go back</a>
          </div>
-      </div>
-      <div class="text"><?= $fetch_comments['comment']; ?></div>
-      <form action="" method="POST">
-         <input type="hidden" name="comment_id" value="<?= $fetch_comments['id']; ?>">
-         <button type="submit" class="inline-delete-btn" name="delete_comment" onclick="return confirm('delete this comment?');">delete comment</button>
       </form>
-   </div>
-   <?php
-         }
-      }else{
-         echo '<p class="empty">no comments added yet!</p>';
-      }
-   ?>
-   </div>
+   </section>
 
-</section>
-
-
-
-
-
-
-
-
-
-<!-- custom js file link  -->
-<script src="../js/admin_script.js"></script>
+   <!-- custom js file link  -->
+   <script src="../js/super-admin.js"></script>
 
 </body>
+
 </html>

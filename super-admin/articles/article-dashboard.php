@@ -1,63 +1,34 @@
+<?php
+
+include $_SERVER['DOCUMENT_ROOT'] . '/bk_WEAMP/WEAMP/public/config.php';
+
+session_start();
+
+$adminID = $_SESSION['adminID'];
+
+if (!isset($adminID)) {
+    header('location:sa-home.php');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article posting</title>
+    <title>Article Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- CSS Style -->
     <link rel="stylesheet" href="../../css/styles.css">
+    <!--<link rel="stylesheet" href="../../css/sa.css">-->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <style>
-    .tool-list {
-        display: flex;
-        flex-flow: row nowrap;
-        list-style: none;
-        padding: 0;
-        overflow: hidden;
-        gap: 10px;
-        border-radius: 5px;
-        background-color: white;
-        justify-content: end;
-        margin-right: 10%;
-    }
-
-    .tool--btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: none;
-        border-radius: 5px;
-        height: 20px;
-        width: 20px;
-        font-size: 12px;
-        cursor: pointer;
-        background-color: transparent;
-    }
-
-    .tool--btn img {
-        width: 100%;
-        height: 100%;
-        vertical-align: middle;
-    }
-
-    .tool--btn:hover {
-        background-color: #dddddd;
-    }
-
-    #output {
-        height: 400px;
-        padding: 1rem;
-        width: 90%;
-        border: 1px solid #333;
-        border-radius: 5px;
-        background-color: white;
-    }
-
     .navbar-nav .nav-item .nav-link {
         color: white;
     }
@@ -149,22 +120,84 @@
         </nav>
     </div>
 
-    <section class="post-editor" style="padding-bottom: 15%">
-        <h1 class="heading">Add new post</h1>
-        <form action="../articles/add-post-process.php" method="post" enctype="multipart/form-data">
-            <p>Post Title <span style="color:#C80000;">*</span></p>
-            <input type="text" name="postTitle" maxlength="100" required placeholder="Add post title" class="box-post">
-            <p>Post Content <span style="color:#C80000;">*</span></p>
-            <textarea name="postContent" class="box-post" required maxlength="20000" placeholder="Write your content..." cols="30" rows="10"></textarea>
-            <p>Post Link</p>
-            <input type="url" name="postLink" class="box-post">
-            <p>Post Image</p>
-            <input type="file" name="postImage" class="box-post">
-            <div class="flex-btn">
-                <input type="submit" value="Publish Post" name="publish" class="btn">
-                <input type="submit" value="Save Draft" name="draft" class="option-btn">
+    <section class="dashboard">
+
+        <h1 class="heading">Posting Dashboard</h1>
+
+        <div class="box-container">
+
+            <!-- Box for Total Posts -->
+            <div class="box">
+                <?php
+                $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ?");
+                $select_posts->bind_param('i', $adminID);  // 'i' for integer
+                $select_posts->execute();
+                $select_posts->store_result();  // Needed to use num_rows
+                $numbers_of_posts = $select_posts->num_rows;  // Count the number of posts
+                ?>
+                <h3><?= $numbers_of_posts; ?></h3>
+                <p>Posts added</p>
+                <a href="../articles/add-post.php" class="btn">Add new post</a>
             </div>
-        </form>
+
+            <!-- Box for Published Posts -->
+            <div class="box">
+                <?php
+                $select_active_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND status = ?");
+                $status = 'Publish';  // Set status to 'Publish'
+                $select_active_posts->bind_param('is', $adminID, $status);  // 'i' for integer, 's' for string
+                $select_active_posts->execute();
+                $select_active_posts->store_result();  // Store result to use num_rows
+                $numbers_of_active_posts = $select_active_posts->num_rows;  // Count active posts
+                ?>
+                <h3><?= $numbers_of_active_posts; ?></h3>
+                <p>Published posts</p>
+                <a href="../articles/view-post.php" class="btn">see posts</a>
+            </div>
+
+            <!-- Box for Draft Posts -->
+            <div class="box">
+                <?php
+                $select_draft_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND status = ?");
+                $status = 'Draft';  // Set status to 'Draft'
+                $select_draft_posts->bind_param('is', $adminID, $status);  // 'i' for integer, 's' for string
+                $select_draft_posts->execute();
+                $select_draft_posts->store_result();  // Store result to use num_rows
+                $numbers_of_draft_posts = $select_draft_posts->num_rows;  // Count draft posts
+                ?>
+                <h3><?= $numbers_of_draft_posts; ?></h3>
+                <p>Draft posts</p>
+                <a href="../articles/view-post.php" class="btn">see posts</a>
+            </div>
+
+            <!-- Box for Total User -->
+            <div class="box">
+                <?php
+                $select_account = $conn->prepare("SELECT * FROM `account`");
+                $select_account->execute();
+                $select_account->store_result();  // Needed to use num_rows
+                $numbers_of_account = $select_account->num_rows;  // Count the number of users
+                ?>
+                <h3><?= $numbers_of_account; ?></h3>
+                <p>Users account</p>
+                <a href="users_accounts.php" class="btn">see users</a>
+            </div>
+
+            <!-- Box for Total Admins -->
+            <div class="box">
+                <?php
+                $select_admins = $conn->prepare("SELECT * FROM `admin`");
+                $select_admins->execute();
+                $select_admins->store_result();  // Needed to use num_rows
+                $numbers_of_admins = $select_admins->num_rows;  // Count the number of admins
+                ?>
+                <h3><?= $numbers_of_admins; ?></h3>
+                <p>Admins account</p>
+                <a href="admin_accounts.php" class="btn">see admins</a>
+            </div>
+
+        </div>
+
     </section>
 
 

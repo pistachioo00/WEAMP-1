@@ -1,94 +1,115 @@
+
 <?php
-
-include $_SERVER['DOCUMENT_ROOT'] . '/bk_WEAMP/WEAMP/public/config.php';
-
+// Include the database configuration file
+require_once '../../public/config.php';
 
 session_start();
 
+include $_SERVER['DOCUMENT_ROOT'] . '/bk_WEAMP/WEAMP/public/config.php';
+
+// Check if adminID is set in the session
+if (!isset($_SESSION['adminID'])) {
+    echo "Admin ID is not set in session.";
+    exit; // Stop further execution
+}
+
 $adminID = $_SESSION['adminID'];
 
-if (!isset($adminID)) {
-    header('location:sa-home.php');
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['publish'])) {
+    $postTitle = filter_var($_POST['postTitle'], FILTER_SANITIZE_STRING);
+    $postContent = filter_var($_POST['postContent'], FILTER_SANITIZE_STRING);
+    $postLink = filter_var($_POST['postLink'], FILTER_SANITIZE_STRING);
+    $postStatus = 'Publish';
 
-if (isset($_POST['Publish'])) {
+    $allowed_exs = array("jpg", "jpeg", "png");
 
-    $title = $_POST['title'];
-    $title = filter_var($title, FILTER_SANITIZE_STRING);
-    $content = $_POST['content'];
-    $content = filter_var($content, FILTER_SANITIZE_STRING);
-    $link = $_POST['link'];
-    $link = filter_var($links, FILTER_SANITIZE_STRING);
-    $status = 'Publish';
+    if (isset($_FILES['postImage'])) {
+        $postImage = $_FILES['postImage']['name'];
+        $postImage_tmp_name = $_FILES['postImage']['tmp_name'];
+        $postImage_error = $_FILES['postImage']['error'];
 
-    $image = $_FILES['image']['name'];
-    $image = filter_var($image, FILTER_SANITIZE_STRING);
-    $image_size = $_FILES['image']['size'];
-    $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folder = '../uploads/articleImage' . $image;
+        if ($postImage_error === 0) {
+            $postImage_ext = strtolower(pathinfo($postImage, PATHINFO_EXTENSION));
+            if (in_array($postImage_ext, $allowed_exs)) {
+                $new_postImage_name = uniqid("POST-", true) . '.' . $postImage_ext;
+                $postImage_upload_path = '../../uploads/articleImages/' . $new_postImage_name;
 
-    $select_image = $conn->prepare("SELECT * FROM posts WHERE image = ? AND adminID = ?");
-    $select_image->execute([$image, $adminID]);
-
-    if (isset($image)) {
-        if ($select_image->rowCount() > 0 and $image != '') {
-            $message[] = 'Image name repeated!';
-        } elseif ($image_size > 5000000) {
-            $message[] = 'Images size is too large!';
+                if (move_uploaded_file($postImage_tmp_name, $postImage_upload_path)) {
+                    // Insert into the database
+                    $insert_post = $conn->prepare("INSERT INTO posts (adminID, postTitle, postContent, postLink, postImage, postStatus) VALUES (?, ?, ?, ?, ?, ?)");
+                    $insert_post->bind_param('isssss', $adminID, $postTitle, $postContent, $postLink, $new_postImage_name, $postStatus);
+                    $insert_post->execute();
+                    echo "Post published!";
+                } else {
+                    echo "Failed to upload post image.";
+                }
+            } else {
+                echo "Invalid file type for post image.";
+            }
         } else {
-            move_uploaded_file($image_tmp_name, $image_folder);
+            echo "Error uploading post image.";
         }
-    } else {
-        $image = '';
     }
 
-    if ($select_image->rowCount() > 0 and $image != '') {
-        $message[] = 'Please rename your image!';
-    } else {
-        $insert_post = $conn->prepare("INSERT INTO posts(adminID, title, content, link, image, status) VALUES(?,?,?,?,?,?,?)");
-        $insert_post->execute([$adminID, $title, $content, $link, $image, $status]);
-        $message[] = 'Post published!';
+    // Check if the image already exists for this admin
+    $select_image = $conn->prepare("SELECT * FROM `posts` WHERE postImage = ? AND adminID = ?");
+    $select_image->bind_param('si', $new_postImage_name, $adminID); // Use new_postImage_name instead of postImage
+    $select_image->execute();
+    $select_image->store_result();
+    $image_count = $select_image->num_rows;
+
+    if ($image_count > 0) {
+        echo 'Image name repeated!';
     }
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['draft'])) {
+    $postTitle = filter_var($_POST['postTitle'], FILTER_SANITIZE_STRING);
+    $postContent = filter_var($_POST['postContent'], FILTER_SANITIZE_STRING);
+    $postLink = filter_var($_POST['postLink'], FILTER_SANITIZE_STRING);
+    $postStatus = 'Draft';
 
-if (isset($_POST['draft'])) {
+    $allowed_exs = array("jpg", "jpeg", "png");
 
-    $title = $_POST['title'];
-    $title = filter_var($title, FILTER_SANITIZE_STRING);
-    $content = $_POST['content'];
-    $content = filter_var($content, FILTER_SANITIZE_STRING);
-    $link = $_POST['link'];
-    $link = filter_var($links, FILTER_SANITIZE_STRING);
-    $status = 'Draft';
+    if (isset($_FILES['postImage'])) {
+        $postImage = $_FILES['postImage']['name'];
+        $postImage_tmp_name = $_FILES['postImage']['tmp_name'];
+        $postImage_error = $_FILES['postImage']['error'];
 
-    $image = $_FILES['image']['name'];
-    $image = filter_var($image, FILTER_SANITIZE_STRING);
-    $image_size = $_FILES['image']['size'];
-    $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folder = '../uploaded_img/' . $image;
+        if ($postImage_error === 0) {
+            $postImage_ext = strtolower(pathinfo($postImage, PATHINFO_EXTENSION));
+            if (in_array($postImage_ext, $allowed_exs)) {
+                $new_postImage_name = uniqid("POST-", true) . '.' . $postImage_ext;
+                $postImage_upload_path = '../../uploads/articleImages/' . $new_postImage_name;
 
-    $select_image = $conn->prepare("SELECT * FROM posts WHERE image = ? AND adminID = ?");
-    $select_image->execute([$image, $adminID]);
+                if (move_uploaded_file($postImage_tmp_name, $postImage_upload_path)) {
+                    // Insert into the database
+                    $insert_post = $conn->prepare("INSERT INTO posts (adminID, postTitle, postContent, postLink, postImage, postStatus) VALUES (?, ?, ?, ?, ?, ?)");
+                    $insert_post->bind_param('isssss', $adminID, $postTitle, $postContent, $postLink, $new_postImage_name, $postStatus);
+                    $insert_post->execute();
 
-    if (isset($image)) {
-        if ($select_image->rowCount() > 0 and $image != '') {
-            $message[] = 'Image name repeated!';
-        } elseif ($image_size > 30000000) {
-            $message[] = 'Images size is too large!';
+                    echo "Draft saved!";
+                } else {
+                    echo "Failed to upload post image.";
+                }
+            } else {
+                echo "Invalid file type for post image.";
+            }
         } else {
-            move_uploaded_file($image_tmp_name, $image_folder);
+            echo "Error uploading post image.";
         }
-    } else {
-        $image = '';
     }
 
-    if ($select_image->rowCount() > 0 and $image != '') {
-        $message[] = 'Please rename your image!';
-    } else {
-        $insert_post = $conn->prepare("INSERT INTO posts(adminID, title, content, link, image, status) VALUES(?,?,?,?,?,?)");
-        $insert_post->execute([$adminID, $title, $content, $link, $image, $status]);
-        $message[] = 'Draft saved!';
+    // Check if the image already exists for this admin
+    $select_postImage = $conn->prepare("SELECT * FROM posts WHERE postImage = ? AND adminID = ?");
+    $select_postImage->bind_param('si', $new_postImage_name, $adminID); // Use new_postImage_name
+    $select_postImage->execute();
+    $select_postImage->store_result();
+    $postImage_count = $select_postImage->num_rows;
+
+    if ($postImage_count > 0) {
+        echo 'Image name repeated!';
     }
 }
+
 ?>

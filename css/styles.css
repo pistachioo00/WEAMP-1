@@ -60,6 +60,27 @@
   src: url(../fonts/Inter-Medium.ttf);
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+:root {
+  --main-color: #304da5;
+  --red: #f04d3b;
+  --orange: #f39c12;
+  --black: #34495e;
+  --white: #fff;
+  --light-bg: #f5f5f5;
+  --light-color: #999;
+  --border: 0.2rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
 /* Navbar brand logo */
 .navbar-brand img {
   margin-right: 10px;
@@ -334,6 +355,160 @@ a {
 .scrollable-content {
   padding: 30px;
 }
+
+/* POSTING ARTICLE - form */
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form-container form {
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  text-align: center;
+  width: 50rem;
+}
+
+.form-container form h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+.form-container form p {
+  margin: 1rem 0;
+  font-size: 2rem;
+  color: var(--light-color);
+}
+
+.form-container form p span {
+  color: var(--main-color);
+}
+
+.form-container form .box-post {
+  width: 100%;
+  background-color: var(--light-bg);
+  padding: 1.4rem;
+  font-size: 1.4rem;
+  color: #314558;
+  margin: 1rem 0;
+  border: var(--border);
+  font-size: 1.8rem;
+  border-radius: 0.5rem;
+}
+
+
+/* VIEW POST - ARTICLE  */
+
+/* 
+.post-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 1.5rem; 
+  width: 100%;
+  max-width: 1200px;
+}
+
+.box {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  position: relative; 
+  transition: transform 0.2s;
+}
+
+.box:hover {
+  transform: scale(1.02); 
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.status {
+  padding: 0.5rem;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.posts-content {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.posts-link {
+  font-size: 0.9rem;
+  color: #007BFF; 
+  margin: 0.5rem 0;
+}
+
+.flex-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.option-btn,
+.delete-btn,
+.btn {
+  background-color: #4CAF50; 
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none; 
+}
+
+.option-btn:hover,
+.delete-btn:hover,
+.btn:hover {
+  background-color: #45a049; 
+} */
+
+/* Button Styles for Delete */
+.delete-btn {
+  background-color: #f44336; /* Red */
+}
+
+.delete-btn:hover {
+  background-color: #e53935; /* Darker red on hover */
+}
+
+/* Empty State Styles */
+.empty {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+}
+
 
 /* PUBLIC SIDE - DASHBOARD */
 .sidebar {
@@ -820,6 +995,93 @@ label {
   margin-bottom: 0;
   padding-right: 35%;
   color: #465da3;
+}
+
+/* Posting Artcle - form  */
+.post-editor form {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+  font-family: "Arial", sans-serif;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+  color: var(--black);
+  font-size: 3rem;
+}
+
+.post-editor p {
+  font-family: "arimo-reg";
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.post-editor .box-post {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+.post-editor .box-post:focus {
+  border-color: #304da5; /* Color from your current styles */
+  outline: none;
+  box-shadow: 0 0 5px rgba(20, 111, 202, 0.5);
+}
+
+.post-editor .flex-btn {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.post-editor .btn,
+.post-editor .option-btn {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-family: "arimo-bold";
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.post-editor .btn {
+  background-color: #304da5;
+  color: #fff;
+}
+
+.post-editor .btn:hover {
+  background-color: #0e5eaa;
+}
+
+.post-editor .option-btn {
+  background-color: #555;
+  color: #fff;
+}
+
+.post-editor .option-btn:hover {
+  background-color: #333;
+}
+
+.post-editor input[type="file"] {
+  font-family: "Arial", sans-serif;
+  padding: 0.4rem;
+  background-color: #e5e5e5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
 }
 
 /* Responsive adjustments */

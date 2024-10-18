@@ -25,7 +25,7 @@ if (!isset($adminID)) {
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- CSS Style -->
     <link rel="stylesheet" href="../../css/styles.css">
-    <!--<link rel="stylesheet" href="../../css/sa.css">-->
+    <!-- <link rel="stylesheet" href="../../css/sa.css"> -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <style>
@@ -58,7 +58,7 @@ if (!isset($adminID)) {
             <hr style="background-color: black;">
             <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
                 <img src="../../assets/user/Expand_right.svg" alt="expand_right">
-                Dashboard
+                Posts Dashboard
             </a>
             <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
                 <img src="../../assets/posting-pen.svg" alt="posting_pen">
@@ -120,14 +120,14 @@ if (!isset($adminID)) {
         </nav>
     </div>
 
-    <section class="dashboard">
+    <section class="post-dashboard" style="padding-bottom: 80%;">
 
         <h1 class="heading">Posting Dashboard</h1>
 
-        <div class="box-container">
+        <div class="post-container">
 
             <!-- Box for Total Posts -->
-            <div class="box">
+            <div class="box-post">
                 <?php
                 $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ?");
                 $select_posts->bind_param('i', $adminID);  // 'i' for integer
@@ -141,59 +141,33 @@ if (!isset($adminID)) {
             </div>
 
             <!-- Box for Published Posts -->
-            <div class="box">
+            <div class="box-post">
                 <?php
-                $select_active_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND status = ?");
-                $status = 'Publish';  // Set status to 'Publish'
-                $select_active_posts->bind_param('is', $adminID, $status);  // 'i' for integer, 's' for string
-                $select_active_posts->execute();
-                $select_active_posts->store_result();  // Store result to use num_rows
-                $numbers_of_active_posts = $select_active_posts->num_rows;  // Count active posts
+                $select_publish_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postStatus = ?");
+                $postStatus = 'Publish';  // Set status to 'Publish'
+                $select_publish_posts->bind_param('is', $adminID, $postStatus);  // 'i' for integer, 's' for string
+                $select_publish_posts->execute();
+                $select_publish_posts->store_result();  // Store result to use num_rows 
+                $numbers_of_publish_posts = $select_publish_posts->num_rows;  // Count active posts
                 ?>
-                <h3><?= $numbers_of_active_posts; ?></h3>
+                <h3><?= $numbers_of_publish_posts; ?></h3>
                 <p>Published posts</p>
-                <a href="../articles/view-post.php" class="btn">see posts</a>
+                <a href="../articles/view-post.php" class="btn">See Posts</a>
             </div>
 
             <!-- Box for Draft Posts -->
-            <div class="box">
+            <div class="box-post">
                 <?php
-                $select_draft_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND status = ?");
-                $status = 'Draft';  // Set status to 'Draft'
-                $select_draft_posts->bind_param('is', $adminID, $status);  // 'i' for integer, 's' for string
+                $select_draft_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postStatus = ?");
+                $postStatus = 'Draft';  // Set status to 'Draft'
+                $select_draft_posts->bind_param('is', $adminID, $postStatus);  // 'i' for integer, 's' for string
                 $select_draft_posts->execute();
                 $select_draft_posts->store_result();  // Store result to use num_rows
                 $numbers_of_draft_posts = $select_draft_posts->num_rows;  // Count draft posts
                 ?>
                 <h3><?= $numbers_of_draft_posts; ?></h3>
                 <p>Draft posts</p>
-                <a href="../articles/view-post.php" class="btn">see posts</a>
-            </div>
-
-            <!-- Box for Total User -->
-            <div class="box">
-                <?php
-                $select_account = $conn->prepare("SELECT * FROM `account`");
-                $select_account->execute();
-                $select_account->store_result();  // Needed to use num_rows
-                $numbers_of_account = $select_account->num_rows;  // Count the number of users
-                ?>
-                <h3><?= $numbers_of_account; ?></h3>
-                <p>Users account</p>
-                <a href="users_accounts.php" class="btn">see users</a>
-            </div>
-
-            <!-- Box for Total Admins -->
-            <div class="box">
-                <?php
-                $select_admins = $conn->prepare("SELECT * FROM `admin`");
-                $select_admins->execute();
-                $select_admins->store_result();  // Needed to use num_rows
-                $numbers_of_admins = $select_admins->num_rows;  // Count the number of admins
-                ?>
-                <h3><?= $numbers_of_admins; ?></h3>
-                <p>Admins account</p>
-                <a href="admin_accounts.php" class="btn">see admins</a>
+                <a href="../articles/view-post.php" class="btn">See Posts</a>
             </div>
 
         </div>

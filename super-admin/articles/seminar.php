@@ -42,7 +42,7 @@
             <hr style="background-color: black;">
             <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
                 <img src="../../assets/user/Expand_right.svg" alt="expand_right">
-                Dashboard
+                Posts Dashboard
             </a>
             <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
                 <img src="../../assets/posting-pen.svg" alt="posting_pen">

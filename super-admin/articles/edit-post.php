@@ -58,44 +58,61 @@ if (isset($_POST['save'])) {
 // Delete Post Logic
 if (isset($_POST['delete_post'])) {
 
-   $postID = $_POST['postID'];
-   $postID = filter_var($postID, FILTER_SANITIZE_STRING);
-   $delete_postImage = $conn->prepare("SELECT * FROM `posts` WHERE postID = ?");
+   // Sanitize the postID
+   $postID = filter_var($_POST['postID'], FILTER_SANITIZE_STRING);
+
+   // Prepare statement to fetch post details, including the image
+   $delete_postImage = $conn->prepare("SELECT postImage FROM `posts` WHERE postID = ?");
    $delete_postImage->execute([$postID]);
    $fetch_delete_postImage = $delete_postImage->fetch(PDO::FETCH_ASSOC);
 
+   // If post has an image, delete it from the server
    if (!empty($fetch_delete_postImage['postImage'])) {
-      unlink('../../uploads/articleImages/' . $fetch_delete_postImage['postImage']);
+      $imagePath = '../../uploads/articleImages/' . $fetch_delete_postImage['postImage'];
+      if (file_exists($imagePath)) {
+         unlink($imagePath);  // Delete the image file
+      }
    }
 
+   // Delete the post from the database
    $delete_post = $conn->prepare("DELETE FROM `posts` WHERE postID = ?");
    $delete_post->execute([$postID]);
 
+   // Success message
    $message[] = 'Post deleted successfully!';
 }
 
 // Delete Image Logic
 if (isset($_POST['delete_postImage'])) {
 
+   // Sanitize the postID
+   $postID = filter_var($_POST['postID'], FILTER_SANITIZE_STRING);
    $empty_image = '';
-   $postID = $_POST['postID'];
-   $postID = filter_var($postID, FILTER_SANITIZE_STRING);
 
-   $delete_postImage = $conn->prepare("SELECT * FROM `posts` WHERE postID = ?");
+   // Fetch the post to get the current image name
+   $delete_postImage = $conn->prepare("SELECT postImage FROM `posts` WHERE postID = ?");
    $delete_postImage->execute([$postID]);
    $fetch_delete_postImage = $delete_postImage->fetch(PDO::FETCH_ASSOC);
 
+   // If the post has an image, delete it from the server
    if (!empty($fetch_delete_postImage['postImage'])) {
-      unlink('../../uploads/articleImages/' . $fetch_delete_postImage['postImage']);
+      $imagePath = '../../uploads/articleImages/' . $fetch_delete_postImage['postImage'];
+      if (file_exists($imagePath)) {
+         unlink($imagePath);  // Delete the image file
+      }
    }
 
+   // Update the database to set the postImage to an empty string
    $unset_postImage = $conn->prepare("UPDATE `posts` SET postImage = ? WHERE postID = ?");
-   $unset_postImage->execute([$empty_postImage, $postID]);
+   $unset_postImage->execute([$empty_image, $postID]);
 
+   // Success message
    $message[] = 'Image deleted successfully!';
 }
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,12 +127,14 @@ if (isset($_POST['delete_postImage'])) {
    <!-- Bootstrap CSS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-   <!-- <link rel="stylesheet" href="../../css/sa.css"> -->
-   <link rel="stylesheet" href="../../css/styles.css">
+   <link rel="stylesheet" href="../../css/sa.css">
+   <!--<link rel="stylesheet" href="../../css/styles.css">-->
    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
+
+   <?php include '../components/admin-header.php' ?>
    <!-- Sidebar -->
    <div class="sidebar mt-5" style="background-color: #FFE5E5; border: 1.8px grey solid">
       <div class="container my-4">
@@ -123,7 +142,7 @@ if (isset($_POST['delete_postImage'])) {
          <hr style="background-color: black;">
          <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
             <img src="../../assets/user/Expand_right.svg" alt="expand_right">
-            Dashboard
+            Posts Dashboard
          </a>
          <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
             <img src="../../assets/posting-pen.svg" alt="posting_pen">
@@ -190,60 +209,59 @@ if (isset($_POST['delete_postImage'])) {
 
       <?php
       $postID = $_GET['postID'];
-      $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE postID = ?");
-      $select_posts->execute([$postID]);
 
-      if ($select_posts->rowCount() > 0) {
-         while ($fetch_posts = $select_posts->fetch(PDO::FETCH_ASSOC)) {
+      // Use MySQLi syntax to prepare and execute the query
+      $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE postID = ?");
+      $select_posts->bind_param('i', $postID);
+      $select_posts->execute();
+      $result = $select_posts->get_result();
+
+      // Check if any posts were returned
+      if ($result->num_rows > 0) {
+         while ($fetch_posts = $result->fetch_assoc()) {
+      ?>
+            <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="old_image" value="<?= htmlspecialchars($fetch_posts['postImage']); ?>">
+               <input type="hidden" name="post_id" value="<?= htmlspecialchars($fetch_posts['postID']); ?>">
+
+               <p>Post status <span>*</span></p>
+               <select name="postStatus" class="box" required>
+                  <option value="<?= htmlspecialchars($fetch_posts['postStatus']); ?>" selected><?= htmlspecialchars($fetch_posts['postStatus']); ?></option>
+                  <option value="publish">Publish</option>
+                  <option value="draft">Draft</option>
+               </select>
+
+               <p>Post Title <span>*</span></p>
+               <input type="text" name="title" maxlength="100" required placeholder="Add post title" class="box" value="<?= htmlspecialchars($fetch_posts['postTitle']); ?>">
+
+               <p>Post Content <span>*</span></p>
+               <textarea name="content" class="box" required maxlength="20000" placeholder="Write your content..." cols="30" rows="10"><?= htmlspecialchars($fetch_posts['postContent']); ?></textarea>
+
+               <p>Post Link <span>*</span></p>
+               <input type="url" name="link" class="box" required value="<?= htmlspecialchars($fetch_posts['postLink']); ?>">
+
+               <p>Post Image</p>
+               <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png, image/webp">
+
+               <?php if (!empty($fetch_posts['postImage'])) { ?>
+                  <img src="../../uploads/articleImages/<?= htmlspecialchars($fetch_posts['postImage']); ?>" class="image" alt="">
+                  <input type="submit" value="Delete Image" class="inline-delete-btn" name="delete_image">
+               <?php } ?>
+
+               <div class="flex-btn">
+                  <input type="submit" value="Save Post" name="save" class="btn">
+                  <a href="../articles/view-post.php" class="option-btn">Go back</a>
+                  <input type="submit" value="Delete Post" class="delete-btn" name="delete_post">
+               </div>
+            </form>
+      <?php
          }
       } else {
          echo '<p class="empty">No posts found!</p>';
       }
       ?>
-         <form action="" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="old_image" value="<?= $fetch_posts['postImage']; ?>">
-            <input type="hidden" name="post_id" value="<?= $fetch_posts['postID']; ?>">
 
-            <p>Post status <span>*</span></p>
-            <select name="postStatus" class="box" required>
-               <option value="<?= $fetch_posts['postStatus']; ?>" selected><?= $fetch_posts['postStatus']; ?></option>
-               <option value="publish">Publish</option>
-               <option value="draft">Draft</option>
-            </select>
-
-            <p>Post Title <span>*</span></p>
-            <input type="text" name="title" maxlength="100" required placeholder="Add post title" class="box" value="<?= $fetch_posts['postTitle']; ?>">
-
-            <p>Post Content <span>*</span></p>
-            <textarea name="content" class="box" required maxlength="20000" placeholder="Write your content..." cols="30" rows="10"><?= $fetch_posts['postContent']; ?></textarea>
-
-            <p>Post Link <span>*</span></p>
-            <input type="url" name="link" class="box" required value="<?= $fetch_posts['postLink']; ?>">
-
-            <p>Post Image</p>
-            <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png, image/webp">
-
-            <?php if ($fetch_posts['postImage'] != '') { ?>
-               <img src="../uploads/articleImages/<?= $fetch_posts['postImage']; ?>" class="image" alt="">
-               <input type="submit" value="Delete Image" class="inline-delete-btn" name="delete_image">
-            <?php } ?>
-
-            <div class="flex-btn">
-               <input type="submit" value="Save Post" name="save" class="btn">
-               <a href="../articles/view-post.php" class="option-btn">Go back</a>
-               <input type="submit" value="Delete Post" class="delete-btn" name="delete_post">
-            </div>
-         </form>
-
-         <div class="flex-btn">
-            <a href="../articles/view-post.php" class="option-btn">View posts</a>
-            <a href="../articles/add-post.php" class="option-btn">Add posts</a>
-         </div>
    </section>
-
-   <!-- custom js file link  -->
-   <script src="../js/admin_script.js"></script>
-
 </body>
 
 </html>

@@ -10,33 +10,63 @@ if (!isset($adminID)) {
    header('location:../super-admin/sa-home.php');
 }
 
+
 if (isset($_POST['delete'])) {
-   $postID = $_POST['postID'];
-   $postID = filter_var($postID, FILTER_SANITIZE_STRING);
+   // Ensure the correct POST key is used, matching your form input
+   $postID = $_POST['post_id'];
 
-   // Use MySQLi syntax
-   $delete_postImage = $conn->prepare("SELECT postImage FROM `posts` WHERE postID = ?");
-   $delete_postImage->bind_param('i', $postID);
-   $delete_postImage->execute();
-   $result = $delete_postImage->get_result();
-   $fetch_delete_postImage = $result->fetch_assoc();
+   // Sanitize postID properly (since it should be an integer)
+   $postID = filter_var($postID, FILTER_SANITIZE_NUMBER_INT);
 
-   if ($fetch_delete_postImage['postImage'] != '') { // Corrected to match the selected column
-      $postImage_path = '../../uploads/articleImages/' . $fetch_delete_postImage['postImage']; // Corrected image path handling
-      if (file_exists($postImage_path)) { // Corrected variable usage
-         unlink($postImage_path);
+   if ($postID) {
+      // Select the postImage for deletion
+      $delete_postImage = $conn->prepare("SELECT postImage FROM `posts` WHERE postID = ?");
+      if ($delete_postImage === false) {
+         die('Prepare failed: ' . htmlspecialchars($conn->error));
       }
+
+      $delete_postImage->bind_param('i', $postID);
+      $delete_postImage->execute();
+
+      $result = $delete_postImage->get_result();
+      $fetch_delete_postImage = $result->fetch_assoc();
+
+      if ($fetch_delete_postImage && !empty($fetch_delete_postImage['postImage'])) {
+         $postImage_path = '../../uploads/articleImages/' . $fetch_delete_postImage['postImage'];
+
+         // Check if the file exists and delete it
+         if (file_exists($postImage_path)) {
+            if (!unlink($postImage_path)) {
+               die('Error deleting the image: ' . $postImage_path);
+            }
+         }
+      }
+
+      $delete_postImage->close();
+
+      // Proceed with deleting the post itself
+      $delete_post = $conn->prepare("DELETE FROM `posts` WHERE postID = ?");
+      if ($delete_post === false) {
+         die('Prepare failed: ' . htmlspecialchars($conn->error));
+      }
+
+      $delete_post->bind_param('i', $postID);
+      $delete_post->execute();
+
+      if ($delete_post->affected_rows > 0) {
+         $message[] = 'Post deleted successfully!';
+      } else {
+         $message[] = 'Post deletion failed!';
+      }
+
+      $delete_post->close();
+   } else {
+      $message[] = 'Invalid post ID.';
    }
-
-   // Delete the post from the database
-   $delete_post = $conn->prepare("DELETE FROM `posts` WHERE postID = ?");
-   $delete_post->bind_param('i', $postID);
-   $delete_post->execute();
-
-   $message[] = 'Post deleted successfully!';
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +81,7 @@ if (isset($_POST['delete'])) {
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
    <link rel="stylesheet" href="../../css/sa.css">
-   <link rel="stylesheet" href="../../css/styles.css">
+   <!-- <link rel="stylesheet" href="../../css/styles.css"> -->
 
 </head>
 <style>
@@ -84,7 +114,7 @@ if (isset($_POST['delete'])) {
          <hr style="background-color: black;">
          <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
             <img src="../../assets/user/Expand_right.svg" alt="expand_right">
-            Dashboard
+            Posts Dashboard
          </a>
          <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
             <img src="../../assets/posting-pen.svg" alt="posting_pen">

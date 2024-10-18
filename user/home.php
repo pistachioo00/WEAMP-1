@@ -310,6 +310,54 @@ checkLogin();
         </div>
     </section>
 
+    <section class="posts-container">
+
+        <h1 class="heading">latest posts</h1>
+
+        <div class="box-container">
+
+            <?php
+            $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE postStatus = ? LIMIT 6 ");
+            $select_posts->execute(['Publish']);
+            if ($select_posts->rowCount() > 0) {
+                while ($fetch_posts = $select_posts->fetch(PDO::FETCH_ASSOC)) {
+
+                    $postID = $fetch_posts['postID'];
+
+            ?>
+                    <form class="box" method="post">
+                        <input type="hidden" name="post_id" value="<?= $postID; ?>">
+                        <input type="hidden" name="admin_id" value="<?= $fetch_posts['adminID']; ?>">
+                        <div class="post-admin">
+                            <i class="fas fa-user"></i>
+                            <!--  -->
+                        </div>
+
+                        <?php
+                        if ($fetch_posts['postImage'] != '') {
+                        ?>
+                            <img src="../uploads/articleImages/?= $fetch_posts['postImage']; ?>" class="post-image" alt="">
+                        <?php
+                        }
+                        ?>
+                        <div class="post-title"><?= $fetch_posts['postTitle']; ?></div>
+                        <div class="post-content content-150"><?= $fetch_posts['postContent']; ?></div>
+                        <a href="../articles/view-post.php?postID=<?= $postID; ?>" class="inline-btn">Read More</a>
+
+                    </form>
+            <?php
+                }
+            } else {
+                echo '<p class="empty">no posts added yet!</p>';
+            }
+            ?>
+        </div>
+
+        <div class="more-btn" style="text-align: center; margin-top:1rem;">
+            <a href="posts.php" class="inline-btn">View all posts</a>
+        </div>
+
+    </section>
     <section class="announcement-sec">
         <div class="container">
             <h1 class="display-2 text-center" style="font-family: main-font; font-size: 2.5rem; padding-top: 7%; padding-bottom: 6%;">ANNOUNCEMENTS</h1>

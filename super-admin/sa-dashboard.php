@@ -10,7 +10,6 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- CSS Style -->
     <link rel="stylesheet" href="../css/styles.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <style>
     .navbar-nav .nav-item .nav-link {
@@ -94,7 +93,7 @@
                 RFA Status
                 <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a href="../super-admin/articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <a href="../super-admin/articles/article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
                 Articles and Seminar
                 <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>

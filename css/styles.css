@@ -216,7 +216,6 @@
 /* Style for the paragraphs */
 .box p {
   margin-top: 0;
-  /* Remove default margin */
 }
 
 /* MISSION AND VISION */
@@ -356,6 +355,45 @@ a {
   padding: 30px;
 }
 
+/* POST DASHBOARD */
+
+.post-dashboard .post-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.post-dashboard .post-container .box {
+  text-align: center;
+  background-color: var(--white);
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  border-radius: 0.5rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.post-dashboard .post-container .box-post h3 {
+  font-size: 2.7rem;
+  color: var(--black);
+}
+
+.dashboard .box-container .box-post h3 span {
+  font-size: 2rem;
+}
+
+.dashboard .box-container .box-post p {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--light-bg);
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  border: var(--border);
+  margin: 1rem 0;
+  color: var(--light-color);
+}
+
 /* POSTING ARTICLE - form */
 
 .form-container {
@@ -404,10 +442,9 @@ a {
   border-radius: 0.5rem;
 }
 
-
 /* VIEW POST - ARTICLE  */
 
-/* 
+/* Post Section Styles */
 .post-section {
   display: flex;
   justify-content: center;
@@ -418,8 +455,11 @@ a {
 
 .box-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-  gap: 1.5rem; 
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* Responsive grid */
+  gap: 1.5rem; /* Space between items */
   width: 100%;
   max-width: 1200px;
 }
@@ -429,12 +469,12 @@ a {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
-  position: relative; 
+  position: relative; /* Positioning for the flex-btn */
   transition: transform 0.2s;
 }
 
 .box:hover {
-  transform: scale(1.02); 
+  transform: scale(1.02); /* Slight zoom effect on hover */
 }
 
 .image {
@@ -465,7 +505,7 @@ a {
 
 .posts-link {
   font-size: 0.9rem;
-  color: #007BFF; 
+  color: #007bff; /* Bootstrap primary color */
   margin: 0.5rem 0;
 }
 
@@ -478,20 +518,20 @@ a {
 .option-btn,
 .delete-btn,
 .btn {
-  background-color: #4CAF50; 
+  background-color: #4caf50; /* Green */
   color: white;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  text-decoration: none; 
+  text-decoration: none; /* Remove underline from link */
 }
 
 .option-btn:hover,
 .delete-btn:hover,
 .btn:hover {
-  background-color: #45a049; 
-} */
+  background-color: #45a049; /* Darker green on hover */
+}
 
 /* Button Styles for Delete */
 .delete-btn {
@@ -508,7 +548,6 @@ a {
   font-size: 1.2rem;
   color: #777;
 }
-
 
 /* PUBLIC SIDE - DASHBOARD */
 .sidebar {

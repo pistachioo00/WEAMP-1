@@ -94,7 +94,15 @@
                 <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>
             <a href="../super-admin/articles/article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                Articles and Seminar
+                Articles
+                <img src="../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="#" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Seminar
+                <img src="../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="#" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Records Management
                 <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>
         </div>
@@ -149,7 +157,7 @@
         <section class="welcome-sec">
             <div class="container">
                 <h1 class="display-1 text-start" style="font-family: main-font;color: #304DA5;">HELLO!</h1>
-                <h2 class="text-start" style="font-family: Arial, sans serif; font-weight: bold; color: #465DA3;">SEADO #1</h2>
+                <h2 class="text-start" style="font-family: Arial, sans serif; font-weight: bold; color: #465DA3;">SuperAdmin</h2>
             </div>
         </section>
 
@@ -178,7 +186,7 @@
                         <h4 class="fw-bold mt-2">ADVICE & COUNSELLING</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0;  padding-right: 32%">1</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_advice.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 4px"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_advice.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 5px"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>
@@ -191,7 +199,7 @@
                         <h4 class="fw-bold mt-2">SETTLED CASES</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0;  padding-right: 34%">2</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_settled.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 8%"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_settled.svg" alt="" style="max-width: 55%; padding-left: 10px; padding-top: 30px"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>
@@ -222,21 +230,21 @@
                         <h4 class="fw-bold mt-2">WITHDRAWALS</h4>
                         <div class="d-flex justify-content-center align-items-center"> <!-- Flex container -->
                             <h1 class="display-1 fw-bold" style="margin-bottom: 0;  padding-right: 33%">1</h1> <!-- Remove margin bottom for alignment -->
-                            <img src="../assets/undraw/sa_withdrawals.svg" alt="" style="max-width: 100%; padding-left: 10px; padding-top: 7%"> <!-- Add padding-left for spacing -->
+                            <img src="../assets/undraw/sa_withdrawals.svg" alt="" style="max-width: 100%; padding-left: 10px; padding-top: 8%"> <!-- Add padding-left for spacing -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer class="footer fixed-bottom" style="background-color: #C80000;">
+        <footer class="footer" style="background-color: #C80000;">
             <div class="container-footer" style="color: white;">
                 <p>Copyright 2024 © All Rights Reserved</br>
                     Worker’s Affairs Office</p>
             </div>
         </footer>
-
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="dashboard.js"></script>
 <script>

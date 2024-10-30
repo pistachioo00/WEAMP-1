@@ -21,56 +21,82 @@ if (!isset($adminID)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Article Dashboard</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- CSS Style -->
-    <link rel="stylesheet" href="../../css/styles.css">
-    <!-- <link rel="stylesheet" href="../../css/sa.css"> -->
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/posting.css">
 </head>
 <style>
-    .navbar-nav .nav-item .nav-link {
-        color: white;
-    }
+.navbar .nav .nav-item .nav-link {
+    color: white;
+}
 
-    .rectangle {
-        background-color: white;
-        border: 2.5px solid #146fca;
-    }
+.rectangle {
+    background-color: white;
+    border: 2.5px solid #146fca;
+}
 
-    .rectangle h4 {
-        font-family: sub-font-bold;
-        color: #304da5;
-    }
+.rectangle h4 {
+    font-family: sub-font-bold;
+    color: #304da5;
+}
 
-    .rectangle h1 {
-        margin-bottom: 0;
-        padding-right: 35%;
-        color: #465da3;
-    }
+.rectangle h1 {
+    margin-bottom: 0;
+    padding-right: 35%;
+    color: #465da3;
+}
+
+.nav-link:hover {
+    color: #00008b;
+    /* Darker color on hover */
+}
 </style>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar mt-5" style="background-color: #FFE5E5; border: 1.8px grey solid">
-        <div class="container my-4">
-            <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:35%; color: #304DA5;">Article Posting</h3>
+        <div class="container my-5">
+            <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:35%; color: #304DA5;">Dashboard
+            </h3>
             <hr style="background-color: black;">
-            <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <a href="#" class="nav-link mt-3"
+                style="font-size: 1.1rem; font-family: sub-font; color: #304DA5; padding-left: 3%">
+                SENA Assistance Desk
                 <img src="../../assets/user/Expand_right.svg" alt="expand_right">
-                Posts Dashboard
             </a>
-            <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../../assets/posting-pen.svg" alt="posting_pen">
-                Add posts
+            <a href="../sa-user-management.php" class="nav-link mt-3"
+                style="font-size: 1.1rem; font-family: sub-font; color: #304DA5; padding-left: 3%">
+                User Management
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a href="../articles/view-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../../assets/view-eye.svg" alt="expand_right">
-                View posts
+            <a href="../sa-rfa-status.php" class="nav-link mt-3"
+                style="font-size: 1.1rem; font-family: sub-font; color: #304DA5; padding-left: 3%">
+                RFA Status
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a href="../articles/seminar.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../../assets/seminars.svg" alt="expand_right">
-                Seminars
+            <a href="../articles/article-dashboard.php" class="nav-link mt-3"
+                style="font-size: 1.1rem; font-family: sub-font; color: #304DA5; padding-left: 3%"
+                onclick="toggleSubMenu(event)">
+                Articles
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <div class="sub-menu">
+                <div class="sub-menu-item">
+                    <a href="../articles/add-post.php">&nbsp;&nbsp;Add Article</a>
+                    <a href=" ../articles/view-post.php">&nbsp;&nbsp;View Article</a>
+                </div>
+            </div>
+            <a href=" ../articles/article-dashboard.php" class="nav-link mt-3"
+                style="font-size: 1.1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Seminar
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="#" class="nav-link mt-3"
+                style="font-size: 1.1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Records Management
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
         </div>
     </div>
@@ -82,7 +108,9 @@ if (!isset($adminID)) {
                 <a class="navbar-brand" href="#">
                     <img src="../../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 70px;">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
@@ -118,66 +146,87 @@ if (!isset($adminID)) {
                 </a>
             </div>
         </nav>
+
+        <section class="post-dashboard">
+            <h1 class="post-heading" style="padding-top:4%;">Articles Dashboard</h1>
+            <div class="box-container">
+                <!-- Box for Total Posts -->
+                <div class="box-post">
+                    <?php
+                    $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ?");
+                    $select_posts->bind_param('i', $adminID);  // 'i' for integer
+                    $select_posts->execute();
+                    $select_posts->store_result();  // Needed to use num_rows
+                    $numbers_of_posts = $select_posts->num_rows;  // Count the number of posts
+                    ?>
+                    <h3><?= $numbers_of_posts; ?></h3>
+                    <p>Posts added</p>
+                    <a href="../articles/add-post.php" class="post-btn">Add new post</a>
+                </div>
+
+                <!-- Box for Published Posts -->
+                <div class="box-post">
+                    <?php
+                    $select_publish_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postStatus = ?");
+                    $postStatus = 'Publish';  // Set status to 'Publish'
+                    $select_publish_posts->bind_param('is', $adminID, $postStatus);  // 'i' for integer, 's' for string
+                    $select_publish_posts->execute();
+                    $select_publish_posts->store_result();  // Store result to use num_rows 
+                    $numbers_of_publish_posts = $select_publish_posts->num_rows;  // Count active posts
+                    ?>
+                    <h3><?= $numbers_of_publish_posts; ?></h3>
+                    <p>Published posts</p>
+                    <a href="../articles/view-post.php" class="post-btn">See Posts</a>
+                </div>
+
+                <!-- Box for Draft Posts -->
+                <div class="box-post">
+                    <?php
+                    $select_draft_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postStatus = ?");
+                    $postStatus = 'Draft';  // Set status to 'Draft'
+                    $select_draft_posts->bind_param('is', $adminID, $postStatus);  // 'i' for integer, 's' for string
+                    $select_draft_posts->execute();
+                    $select_draft_posts->store_result();  // Store result to use num_rows
+                    $numbers_of_draft_posts = $select_draft_posts->num_rows;  // Count draft posts
+                    ?>
+                    <h3><?= $numbers_of_draft_posts; ?></h3>
+                    <p>Draft posts</p>
+                    <a href="../articles/view-post.php" class="post-btn">See Posts</a>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <section class="post-dashboard" style="padding-bottom: 80%;">
-
-        <h1 class="heading">Posting Dashboard</h1>
-
-        <div class="post-container">
-
-            <!-- Box for Total Posts -->
-            <div class="box-post">
-                <?php
-                $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ?");
-                $select_posts->bind_param('i', $adminID);  // 'i' for integer
-                $select_posts->execute();
-                $select_posts->store_result();  // Needed to use num_rows
-                $numbers_of_posts = $select_posts->num_rows;  // Count the number of posts
-                ?>
-                <h3><?= $numbers_of_posts; ?></h3>
-                <p>Posts added</p>
-                <a href="../articles/add-post.php" class="btn">Add new post</a>
-            </div>
-
-            <!-- Box for Published Posts -->
-            <div class="box-post">
-                <?php
-                $select_publish_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postStatus = ?");
-                $postStatus = 'Publish';  // Set status to 'Publish'
-                $select_publish_posts->bind_param('is', $adminID, $postStatus);  // 'i' for integer, 's' for string
-                $select_publish_posts->execute();
-                $select_publish_posts->store_result();  // Store result to use num_rows 
-                $numbers_of_publish_posts = $select_publish_posts->num_rows;  // Count active posts
-                ?>
-                <h3><?= $numbers_of_publish_posts; ?></h3>
-                <p>Published posts</p>
-                <a href="../articles/view-post.php" class="btn">See Posts</a>
-            </div>
-
-            <!-- Box for Draft Posts -->
-            <div class="box-post">
-                <?php
-                $select_draft_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postStatus = ?");
-                $postStatus = 'Draft';  // Set status to 'Draft'
-                $select_draft_posts->bind_param('is', $adminID, $postStatus);  // 'i' for integer, 's' for string
-                $select_draft_posts->execute();
-                $select_draft_posts->store_result();  // Store result to use num_rows
-                $numbers_of_draft_posts = $select_draft_posts->num_rows;  // Count draft posts
-                ?>
-                <h3><?= $numbers_of_draft_posts; ?></h3>
-                <p>Draft posts</p>
-                <a href="../articles/view-post.php" class="btn">See Posts</a>
-            </div>
-
-        </div>
-
-    </section>
 
 
     <!-- custom js file link  -->
     <script src="../js/super-admin.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const articleLink = document.getElementById('articleLink');
+        const subMenu = document.querySelector('.sub-menu');
 
+        // Check if we're on the article dashboard page
+        if (window.location.href.includes("article-dashboard.php")) {
+            subMenu.style.display = 'block'; // Automatically show the sub-menu
+        }
+
+        // Toggle sub-menu visibility when "Articles" link is clicked
+        articleLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent navigation if desired
+            subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+            window.location.href = "article-dashboard.php"; // Redirect to the Articles page
+        });
+
+        // Hide the sub-menu when clicking on other sidebar links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                if (this !== articleLink) {
+                    subMenu.style.display = 'none'; // Hide sub-menu
+                }
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>

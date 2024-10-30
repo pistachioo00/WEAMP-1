@@ -60,6 +60,27 @@
   src: url(../fonts/Inter-Medium.ttf);
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+:root {
+  --main-color: #304da5;
+  --red: #f04d3b;
+  --orange: #f39c12;
+  --black: #294159;
+  --white: #fff;
+  --light-bg: #f5f5f5;
+  --light-color: #999;
+  --border: 0.2rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
 /* Navbar brand logo */
 .navbar-brand img {
   margin-right: 10px;
@@ -78,12 +99,8 @@
 
 /* Additional styling for the navbar */
 .navbar {
-  border-bottom: 1px solid rgb(32, 14, 14);
+  border-bottom: 1px solid black;
   padding: 10px 0;
-}
-
-.navbar .nav .nav-item .nav-link {
-  color: white;
 }
 
 .welcome-sec {
@@ -199,7 +216,6 @@
 /* Style for the paragraphs */
 .box p {
   margin-top: 0;
-  /* Remove default margin */
 }
 
 /* MISSION AND VISION */
@@ -218,7 +234,7 @@ footer {
   bottom: 0;
   width: 100%;
   background-color: #f8f9fa;
-  padding: 15px 0;
+  padding: 30px 0;
 }
 
 /* */
@@ -271,8 +287,6 @@ button:hover {
 #terms-conditions {
   font-size: small;
 }
-
-
 
 .login {
   text-decoration: underline;
@@ -439,7 +453,6 @@ a {
 .table {
   border-collapse: separate;
   border-spacing: 0;
-
 }
 .table th,
 .table td {
@@ -506,16 +519,14 @@ a {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  border: 3px solid #304DA5; /* Add border to the table */
-  border-radius: 7px;
+  border: 2px solid black; /* Add border to the table */
 }
 
 .table-sena-records th,
 .table-sena-records td {
-  border-bottom: 2px solid #304DA5; /* Add bottom border to each cell */
+  border-bottom: 2px solid black; /* Add bottom border to each cell */
   padding: 8px;
   text-align: center;
-  color:rgb(20, 15, 15);
 }
 
 .table-sena-records td {
@@ -525,7 +536,7 @@ a {
 .table-sena-records th {
   background-color: transparent;
   text-align: center;
-  border-bottom: 3px solid #304DA5; /* Adjust the thickness of the bottom border for the header */
+  border-bottom: 3px solid black; /* Adjust the thickness of the bottom border for the header */
   font-family: "sub-font-bold";
 }
 
@@ -535,7 +546,7 @@ a {
 }
 
 .button-container {
-  background-color: #465DA3;
+  background-color: black;
   border-radius: 5px;
   width: 80%;
   justify-content: center;
@@ -810,6 +821,28 @@ label {
 
 /* ASSIGNMENT TAKE ACTION */
 
+/* SIDEBAR - DASHBOARD SA */
+.navbar-nav .nav-item .nav-link {
+  color: white;
+}
+
+.rectangle {
+  background-color: white;
+  border: 2.5px solid #146fca;
+}
+
+.rectangle h4 {
+  font-family: sub-font-bold;
+  color: #304da5;
+}
+
+.rectangle h1 {
+  margin-bottom: 0;
+  padding-right: 35%;
+  color: #465da3;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .navbar-nav {
@@ -824,5 +857,55 @@ label {
 
   .navbar-brand img:nth-of-type(2) {
     display: none;
+  }
+}
+
+/* media queries  */
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 55%;
+  }
+
+  body {
+    padding-left: 0;
+  }
+
+  #menu-btn {
+    display: block;
+  }
+
+  .header {
+    left: -35rem;
+    transition: 0.2s linear;
+  }
+
+  .header.active {
+    left: 0rem;
+    box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.7);
+    border-right: none;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+
+  .flex-btn {
+    flex-flow: column;
+    gap: 0;
+  }
+
+  .heading {
+    font-size: 3rem;
+  }
+
+  .show-posts .box-container {
+    grid-template-columns: 1fr;
+  }
+
+  .accounts .box-container {
+    grid-template-columns: 1fr;
   }
 }

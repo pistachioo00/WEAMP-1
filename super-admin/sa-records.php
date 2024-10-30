@@ -4,96 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Worker's Affairs Office</title>
+    <title>Records Management</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- CSS Style -->
     <link rel="stylesheet" href="../css/styles.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
-<style>
-    .navbar-nav .nav-item .nav-link {
-        color: white;
-    }
-
-    .rectangle {
-        background-color: white;
-        border: 2.5px solid #146fca;
-    }
-
-    .rectangle h4 {
-        font-family: sub-font-bold;
-        color: #304da5;
-    }
-
-    .rectangle h1 {
-        margin-bottom: 0;
-        padding-right: 35%;
-        color: #465da3;
-    }
-
-    /* 
-    .container {
-        overflow: hidden;
-    }
-
-    .sidebar {
-        display: none;
-         // Initially hide the sidebar
-        background-color: white;
-        border: 1.8px black solid;
-        width: 250px;
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100%;
-        z-index: 1000;
-        transition: right 0.3s ease;
-    }
-
-    .sidebar.visible {
-        display: block;
-        // Show the sidebar when visible class is added 
-    }
-
-    .mt-5 {
-        margin-top: 5rem;
-    }
-
-    .my-5 {
-        margin-top: 5rem;
-        margin-bottom: 5rem;
-    }
-
-    .text-center {
-        text-align: center;
-    }
-
-    .nav-link {
-        display: block;
-        padding: 10px 0;
-    } */
-</style>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar mt-5" style="background-color: #FFE5E5; border: 1.8px grey solid">
-        <div class="container my-4">
-            <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:35%; color: #304DA5;">Article Posting</h3>
+        <div class="container my-5">
+            <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:35%; color: #304DA5;">Dashboard
+            </h3>
             <hr style="background-color: black;">
-            <a href="sa-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <a href="#" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                SENA Assistance Desk
                 <img src="../assets/user/Expand_right.svg" alt="expand_right">
-                Dashoard
-
             </a>
-            <a href="../super-admin/articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../assets/posting-pen.svg" alt="posting_pen">
-                Add posts
+            <a href="sa-user-management.php" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                User Management
+                <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a href="sa-user-management.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../assets/view-eye.svg" alt="expand_right">
-                View posts
+            <a href="sa-rfa-status.php" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                RFA Status
+                <img src="../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="../super-admin/articles/article-dashboard.php" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Articles
+                <img src="../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="#" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Seminar
+                <img src="../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="#" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Records Management
+                <img src="../assets/user/Expand_right.svg" alt="expand_right">
             </a>
         </div>
     </div>
@@ -105,7 +60,9 @@
                 <a class="navbar-brand" href="#">
                     <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 70px;">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
@@ -114,7 +71,8 @@
                             <a class="nav-link" href="../super-admin/sa-home.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../super-admin/sa-dashboard.php">Dashboard</a>
+                            <a class="nav-link active" aria-current="page"
+                                href="../super-admin/sa-dashboard.php">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../super-admin/sa-rfa-entries.php">RFA</a>
@@ -143,7 +101,11 @@
                 </a>
             </div>
         </nav>
-    </div>
+
+
+
+
+
 </body>
 
 </html>

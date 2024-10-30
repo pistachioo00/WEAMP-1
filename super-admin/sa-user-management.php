@@ -12,6 +12,10 @@
     <!-- CSS Style -->
     <link rel="stylesheet" href="../css/styles.css">
     <style>
+        .navbar .nav .nav-item .nav-link {
+            color: white;
+        }
+
         .container {
             overflow: hidden;
         }
@@ -19,51 +23,58 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #C80000;">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 80px;">
+                <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 70px;">
             </a>
-            <button style="width: 10%; height: 50%" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
                 <ul class="nav nav-underline navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
-                    <li class="nav-items">
+                    <li class="nav-item">
                         <a class="nav-link" href="../super-admin/sa-home.php">Home</a>
                     </li>
-                    <li class="nav-items">
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="../super-admin/sa-dashboard.php">Dashboard</a>
                     </li>
-                    <li class="nav-items">
-                        <a class="nav-link" href="../super-admin/sa-rfa-entries.php" id="rfaLink" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="click" data-bs-title="<strong>New Entries</strong>" data-bs-content="Assignment" data-bs-placement="bottom">RFA</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../super-admin/sa-rfa-entries.php">RFA</a>
                     </li>
-                    <li class="nav-items">
+                    <li class="nav-item">
                         <a class="nav-link" href="../super-admin/sa-sena-records.php">Records</a>
-                    </li>
-                    <div class="mr-5"></div>
-                    <li>
-                        <a class="nav-link" href="../super-admin/sa-account.php">
-                            <img src="../assets/User-register.svg" alt="Register" style="width: 20px; height: 20px; margin-right: 5px;">
-                            My Account
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="../super-admin/sa-login.php">
-                            <img src="../assets/Sign_in_squre.svg" alt="Sign-in" style="width: 20px; height: 20px; margin-right: 5px;">
-                            Log out
-                        </a>
                     </li>
                 </ul>
             </div>
-
-            <!-- Popover Content -->
-            <div id="popoverContent" style="display: none;">
-                <div class="popover-body">
-                    Assignment
-                </div>
-            </div>
+            <a href="#">
+                <ul class="navbar-nav ml-auto">
+            </a>
+            <a class="nav-link" href="../super-admin/sa-account.php" style="color: white">
+                <img src="../assets/User/User.svg" alt="My-Account"
+                    style="width: 20px; height: 20px; margin-right: 5px;">
+                My Account
+            </a>
+            <a class="nav-link" href="../logout.php" onclick="showLogoutConfirmation()" style="color: white">
+                <img src="../assets/User/Line1.svg" alt="Line"
+                    style="width: 20px; height: 20px; margin-right: 5px;">
+                <img src="../assets/User/Sign_out_squre.svg" alt="Sign-out"
+                    style="width: 20px; height: 20px; margin-right: 5px;">
+                Log Out
+            </a>
+            </ul>
+            </a>
         </div>
+    </nav>
+
+
+    <!-- Popover Content -->
+    <div id="popoverContent" style="display: none;">
+        <div class="popover-body">
+            Assignment
+        </div>
+    </div>
+    </div>
     </nav>
 
 
@@ -158,7 +169,7 @@
                 <div class="modal-body">
                     Are you sure you want to disable this account? <br><br>
                     <h5>UserName:
-                        <p style="display: inline; text-align-left: 15%">mamalinda</p>
+                        <p style="display: inline; text-align-left: 15%;">mamalinda</p>
                     </h5>
                 </div>
                 <div class="modal-footer">
@@ -194,10 +205,13 @@
         <div class="container">
             <div class="row justify-content-between mb-2">
                 <div class="col ml-auto">
-                    <h2 class="fw-bold mt-3" style="font-family: sub-font-bold">Admin Accounts</h2>
+                    <a href="../super-admin/sa-dashboard.php" class="fw-bold mt-3" style="font-family: sub-font-bold; font-size: 2rem; text-decoration: none; color:#232525;">
+                        <img src="../assets/user/Expand_left.svg" alt="expand_left">
+                        Admin Account
+                    </a>
                 </div>
                 <div class="col-auto d-flex justify-content-center align-items-center">
-                    <button class="btn btn-dark fw-bold" style="font-size: 1rem; padding: 13px;  border-radius: 50px">
+                    <button class="btn btn-dark fw-bold" style="font-size: 1rem; padding: 13px;  border-radius: 50px; background-color: #304DA5;">
                         <div class="d-flex align-items-center justify-content-center text-center" style="font-weight:bold; font-family: Arial;">
                             <img src="../assets/file-dock-add.svg" alt="Image" style="margin-right: 5px; width: 25px; height: 25px; ">
                             <a class="nav-link" href="../super-admin/create-admin.php">Create New</a>
@@ -293,10 +307,10 @@
 
 
 
-    <footer class="footer fixed-bottom">
-        <div class="container-footer">
-            <p class="text-muted">Copyright 2024 © All Rights Reserved</br>
-                Worker's Affairs Office</p>
+    <footer class="footer" style="background-color: #C80000;">
+        <div class="container-footer" style="color: white;">
+            <p>Copyright 2024 © All Rights Reserved</br>
+                Worker’s Affairs Office</p>
         </div>
     </footer>
 
@@ -304,13 +318,7 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     // Initialize popovers
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

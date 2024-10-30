@@ -21,6 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['publish'])) {
     $postLink = filter_var($_POST['postLink'], FILTER_SANITIZE_STRING);
     $postStatus = 'Publish';
 
+    function generateUniqueImageName($imageFile) {
+    // Get the file extension
+    $extension = pathinfo($imageFile, PATHINFO_EXTENSION);
+    
+    // Generate a unique file name based on the current timestamp and a random number
+    $uniqueName = uniqid() . '_' . time() . '.' . $extension;
+
+    return $uniqueName;
+}
+
+    // Function to generate a unique file name if the image name already exists
+
+
     $allowed_exs = array("jpg", "jpeg", "png");
 
     if (isset($_FILES['postImage'])) {
@@ -51,16 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['publish'])) {
         }
     }
 
-    // Check if the image already exists for this admin
-    $select_image = $conn->prepare("SELECT * FROM `posts` WHERE postImage = ? AND adminID = ?");
-    $select_image->bind_param('si', $new_postImage_name, $adminID); // Use new_postImage_name instead of postImage
-    $select_image->execute();
-    $select_image->store_result();
-    $image_count = $select_image->num_rows;
-
-    if ($image_count > 0) {
-        echo 'Image name repeated!';
-    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['draft'])) {
@@ -68,6 +71,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['draft'])) {
     $postContent = filter_var($_POST['postContent'], FILTER_SANITIZE_STRING);
     $postLink = filter_var($_POST['postLink'], FILTER_SANITIZE_STRING);
     $postStatus = 'Draft';
+    
+    function generateUniqueImageName($imageFile)
+    {
+        // Get the file extension
+        $extension = pathinfo($imageFile, PATHINFO_EXTENSION);
+
+        // Generate a unique file name based on the current timestamp and a random number
+        $uniqueName = uniqid() . '_' . time() . '.' . $extension;
+
+        return $uniqueName;
+    }
+
+    // Function to generate a unique file name if the image name already exists
+
 
     $allowed_exs = array("jpg", "jpeg", "png");
 
@@ -100,16 +117,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['draft'])) {
         }
     }
 
-    // Check if the image already exists for this admin
-    $select_postImage = $conn->prepare("SELECT * FROM posts WHERE postImage = ? AND adminID = ?");
-    $select_postImage->bind_param('si', $new_postImage_name, $adminID); // Use new_postImage_name
-    $select_postImage->execute();
-    $select_postImage->store_result();
-    $postImage_count = $select_postImage->num_rows;
-
-    if ($postImage_count > 0) {
-        echo 'Image name repeated!';
-    }
-}
-
-?>
+}  
+    ?>

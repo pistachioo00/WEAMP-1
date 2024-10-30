@@ -72,172 +72,242 @@ if (isset($_POST['delete'])) {
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Posts</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Articles</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../css/posting.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-   <!-- Bootstrap CSS -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-   <link rel="stylesheet" href="../../css/sa.css">
-   <!-- <link rel="stylesheet" href="../../css/styles.css"> -->
+
 
 </head>
 <style>
-   .navbar-nav .nav-item .nav-link {
-      color: white;
-   }
+.rectangle {
+    background-color: white;
+    border: 2.5px solid #146fca;
+}
 
-   .rectangle {
-      background-color: white;
-      border: 2.5px solid #146fca;
-   }
+.rectangle h4 {
+    font-family: sub-font-bold;
+    color: #304da5;
+}
 
-   .rectangle h4 {
-      font-family: sub-font-bold;
-      color: #304da5;
-   }
-
-   .rectangle h1 {
-      margin-bottom: 0;
-      padding-right: 35%;
-      color: #465da3;
-   }
+.rectangle h1 {
+    margin-bottom: 0;
+    padding-right: 35%;
+    color: #465da3;
+}
 </style>
 
 <body>
-   <!-- Sidebar -->
-   <div class="sidebar mt-5" style="background-color: #FFE5E5; border: 1.8px grey solid">
-      <div class="container my-4">
-         <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:35%; color: #304DA5;">Article Posting</h3>
-         <hr style="background-color: black;">
-         <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-            <img src="../../assets/user/Expand_right.svg" alt="expand_right">
-            Posts Dashboard
-         </a>
-         <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-            <img src="../../assets/posting-pen.svg" alt="posting_pen">
-            Add posts
-         </a>
-         <a href="../articles/view-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-            <img src="../../assets/view-eye.svg" alt="expand_right">
-            View posts
-         </a>
-         <a href="../articles/seminar.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-            <img src="../../assets/seminars.svg" alt="expand_right">
-            Seminars
-         </a>
-      </div>
-   </div>
-
-   <!-- Main content -->
-   <div class="main-content">
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #C80000;">
-         <div class="container">
-            <a class="navbar-brand" href="#">
-               <img src="../../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 70px;">
+    <!-- Sidebar -->
+    <div class="sidebar mt-5" style="background-color: #FFE5E5; border: 1.8px grey solid">
+        <div class="container my-5">
+            <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:20%; color: #304DA5;">Dashboard
+            </h3>
+            <hr style="background-color: black;">
+            <a href="#" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                SENA Assistance Desk
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
-               <ul class="nav nav-underline navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
-                  <li class="nav-item">
-                     <a class="nav-link" href="../sa-home.php">Home</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link active" aria-current="page" href="../sa-dashboard.php">Dashboard</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="../sa-rfa-entries.php">RFA</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="../sa-sena-records.php">Records</a>
-                  </li>
-               </ul>
+            <a href="../sa-user-management.php" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                User Management
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="../sa-rfa-status.php" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                RFA Status
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="../articles/article-dashboard.php" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%"
+                onclick="toggleSubMenu(event)">
+                Articles
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <div class="sub-menu">
+                <div class="sub-menu-item">
+                    <a href="../articles/add-post.php">&nbsp;&nbsp;Add Article</a>
+                    <a href=" ../articles/view-post.php">&nbsp;&nbsp;View Article</a>
+                </div>
             </div>
-            <a href="#">
-               <ul class="navbar-nav ml-auto">
+            <a href=" ../articles/article-dashboard.php" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Seminar
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a class="nav-link" href="../sa-account.php" style="color: white">
-               <img src="../../assets/User/User.svg" alt="My-Account"
-                  style="width: 20px; height: 20px; margin-right: 5px;">
-               My Account
+            <a href="#" class="nav-link mt-3"
+                style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Records Management
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a class="nav-link" href="../logout.php" onclick="showLogoutConfirmation()" style="color: white">
-               <img src="../../assets/User/Line1.svg" alt="Line"
-                  style="width: 20px; height: 20px; margin-right: 5px;">
-               <img src="../../assets/User/Sign_out_squre.svg" alt="Sign-out"
-                  style="width: 20px; height: 20px; margin-right: 5px;">
-               Log Out
-            </a>
-         </div>
-      </nav>
-   </div>
-   <!-- Main content -->
-   <br><br><br>
-   <h1 class="heading">Your posts</h1>
+        </div>
+    </div>
 
-   <section class="post-section">
-      <div class="box-container">
 
-         <?php
-         // Selecting posts based on adminID
-         $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ?");
-         $select_posts->bind_param('i', $adminID); // Bind adminID as an integer
-         $select_posts->execute();
-         $result = $select_posts->get_result();
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #C80000;">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="../../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 70px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
+                    <ul class="nav nav-underline navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sa-home.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../sa-dashboard.php">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sa-rfa-entries.php">RFA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sa-sena-records.php">Records</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#">
+                    <ul class="navbar-nav ml-auto">
+                </a>
+                <a class="nav-link" href="../sa-account.php" style="color: white">
+                    <img src="../../assets/User/User.svg" alt="My-Account"
+                        style="width: 20px; height: 20px; margin-right: 5px;">
+                    My Account
+                </a>
+                <a class="nav-link" href="../logout.php" onclick="showLogoutConfirmation()" style="color: white">
+                    rn <img src="../../assets/User/Line1.svg" alt="Line"
+                        style="width: 20px; height: 20px; margin-right: 5px;">
+                    <img src="../../assets/User/Sign_out_squre.svg" alt="Sign-out"
+                        style="width: 20px; height: 20px; margin-right: 5px;">
+                    Log Out
+                </a>
+            </div>
+        </nav>
 
-         // Check if there are posts available
-         if ($result->num_rows > 0) {
-            while ($fetch_posts = $result->fetch_assoc()) {
-               $postID = $fetch_posts['postID'];
-               $postImage = htmlspecialchars($fetch_posts['postImage']); // Fetch post image uniquely for each post
-         ?>
-               <form method="post" class="box">
-                  <input type="hidden" name="post_id" value="<?= $postID; ?>">
+        <br><br>
+        <!-- Article Posts -->
+        <h1 class="post-heading">Article posts</h1>
+        <div class="table-wrapper">
+            <table class="posts-table">
+                <thead>
+                    <tr>
+                        <th>Article Image</th>
+                        <th>Article Title</th>
+                        <th>Article Status</th>
+                        <th>Article Content</th>
+                        <th>Article Creation Date</th>
+                        <th>Article Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                  <!-- Display the post image if available -->
-                  <?php if (!empty($postImage)) { ?>
-                     <img src="../../uploads/articleImages/<?= $postImage; ?>" class="image"
-                        alt="Post Image" style="width:200px;height:auto;" data-bs-toggle="modal"
-                        data-bs-target="#postImageModal">
-                  <?php } ?>
+                    <?php
+               // Selecting posts based on adminID
+               $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ?");
+               $select_posts->bind_param('i', $adminID);
+               $select_posts->execute();
+               $result = $select_posts->get_result();
 
-                  <!-- Post status with color coding -->
-                  <div class="status" style="background-color:<?php
-                                                               echo ($fetch_posts['postStatus'] == 'publish') ? 'limegreen' : 'coral';
-                                                               ?>;">
-                     <?= $fetch_posts['postStatus']; ?>
-                  </div>
+               // Check if there are posts available
+               if ($result->num_rows > 0) {
+                  while ($fetch_posts = $result->fetch_assoc()) {
+                     $postID = $fetch_posts['postID'];
+                     $postImage = htmlspecialchars($fetch_posts['postImage']);
+                     $postTitle = htmlspecialchars($fetch_posts['postTitle']);
+                     $postContent = htmlspecialchars($fetch_posts['postContent']);
+                     $postLink = htmlspecialchars($fetch_posts['postLink']);
+                     $postStatus = htmlspecialchars($fetch_posts['postStatus']);
+                     $postDate = htmlspecialchars($fetch_posts['postDate']);
+               ?>
+                    <tr>
+                        <!-- Display the post image -->
+                        <td>
+                            <?php if (!empty($postImage)) { ?>
+                            <img src="../../uploads/articleImages/<?= $postImage; ?>" class="post-image"
+                                alt="Post Image" style="width:60px;height:60px;object-fit:cover;">
+                            <?php } ?>
+                        </td>
 
-                  <!-- Post details -->
-                  <div class="title"><?= htmlspecialchars($fetch_posts['postTitle']); ?></div>
-                  <div class="posts-content"><?= htmlspecialchars($fetch_posts['postContent']); ?></div>
-                  <div class="posts-link"><?= htmlspecialchars($fetch_posts['postLink']); ?></div>
+                        <!-- Display the post title -->
+                        <td><?= $postTitle; ?></td>
 
-                  <!-- Action buttons -->
-                  <div class="flex-btn">
-                     <a href="../articles/edit-post.php?postID=<?= $postID; ?>" class="option-btn">Edit</a>
-                     <button type="submit" name="delete" class="delete-btn"
-                        onclick="return confirm('Delete this post?');">Delete</button>
-                  </div>
-                  <a href="../articles/read-post.php?postID=<?= $postID; ?>" class="btn">View post</a>
-               </form>
-         <?php
+                        <!-- Display the post status with color coding -->
+                        <td>
+                            <span class="post-status"
+                                style="background-color:<?= ($postStatus == 'Publish') ? 'rgb(15, 134, 15)' : 'coral'; ?>;">
+                                <?= $fetch_posts['postStatus']; ?>
+                            </span>
+                        </td>
+
+                        <!-- Display the post content -->
+                        <td class="post-content"><?= $postContent; ?></td>
+
+                        <!-- Display the creation date -->
+                        <td><?= $postDate; ?></td>
+
+                        <!-- Action buttons -->
+                        <td>
+                            <a href="../articles/edit-post.php?postID=<?= $postID; ?>" class="post-option-btn">Edit</a>
+                            <form method="post" style="display:inline;">
+                                <input type="hidden" name="post_id" value="<?= $postID; ?>">
+                                <button type="submit" name="delete" class="p-delete-btn"
+                                    onclick="return confirm('Delete this post?');">Delete</button>
+                            </form>
+                            <a href="../articles/read-post.php?postID=<?= $postID; ?>" class="post-btn">View</a>
+                        </td>
+                    </tr>
+                    <?php
+                  }
+               } else {
+                  echo '<tr><td colspan="6" class="empty">No posts added yet! <a href="../articles/add-post.php" class="post-btn">Add post</a></td></tr>';
+               }
+               ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- custom js file link  -->
+        <script src="../js/super-admin.js"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const articleLink = document.getElementById('articleLink');
+            const subMenu = document.querySelector('.sub-menu');
+
+            // Check if we're on the article dashboard page
+            if (window.location.href.includes("view-post.php")) {
+                subMenu.style.display = 'block'; // Automatically show the sub-menu
             }
-         } else {
-            echo '<p class="empty">No posts added yet! <a href="../articles/add-post.php" class="btn" style="margin-top:1.5rem;">Add post</a></p>';
-         }
-         ?>
 
-      </div>
-   </section>
+            // Toggle sub-menu visibility when "Articles" link is clicked
+            articleLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent navigation if desired
+                subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+                window.location.href = "view-post.php"; // Redirect to the Articles page
+            });
 
-   <!-- custom js file link  -->
-   <script src="../js/super-admin.js"></script>
+            // Hide the sub-menu when clicking on other sidebar links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    if (this !== articleLink) {
+                        subMenu.style.display = 'none'; // Hide sub-menu
+                    }
+                });
+            });
+        });
+        </script>
 </body>
 
 </html>

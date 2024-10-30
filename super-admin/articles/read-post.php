@@ -31,6 +31,7 @@ if (isset($_POST['delete'])) {
    $delete_post->execute([$postID]);
 
    header('location:../../articles/view-post.php');
+   exit(); // Ensure no further code runs after redirect
 }
 
 ?>
@@ -46,11 +47,7 @@ if (isset($_POST['delete'])) {
    <!-- Bootstrap CSS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-   <!-- <link rel="stylesheet" href="../../css/sa.css"> -->
-   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-   <!-- custom css file link  -->
    <link rel="stylesheet" href="../../css/styles.css">
-
 </head>
 
 <body>
@@ -62,32 +59,39 @@ if (isset($_POST['delete'])) {
       $select_posts = $conn->prepare("SELECT * FROM `posts` WHERE adminID = ? AND postID = ?");
       $select_posts->execute([$adminID, $get_id]);
 
-      if ($select_posts->rowCount() > 0) {
+      // Use rowCount to check if post exists
+      if ($select_posts->num_rows() > 0) {
          $fetch_posts = $select_posts->fetch(PDO::FETCH_ASSOC); // Fetch single post
          $postID = $fetch_posts['postID'];
       } else {
          echo '<p>No post found!</p>';
+         $fetch_posts = null; // Set fetch_posts to null if no post is found
       }
       ?>
-      <form method="post">
-         <input type="hidden" name="postID" value="<?= $postID; ?>">
-         <div class="status" style="background-color:<?php if ($fetch_posts['postStatus'] == 'publish') {
-                                                         echo 'limegreen';
-                                                      } else {
-                                                         echo 'coral';
-                                                      }; ?>;"><?= $fetch_posts['postStatus']; ?></div>
-         <?php if (!empty($fetch_posts['postImage'])) { ?>
-            <img src="../../uploads/articleImages/<?= $fetch_posts['postImage']; ?>" class="image" alt="">
-         <?php } ?>
-         <div class="title"><?= $fetch_posts['postTitle']; ?></div>
-         <div class="content"><?= $fetch_posts['postContent']; ?></div>
-         <div class="link"><?= $fetch_posts['postLink']; ?></div>
-         <div class="flex-btn">
-            <a href="../../articles/edit-post.php?id=<?= $postID; ?>" class="inline-option-btn">Edit</a>
-            <button type="submit" name="delete" class="inline-delete-btn" onclick="return confirm('Delete this post?');">Delete</button>
-            <a href="../../articles/view-post.php" class="inline-option-btn">Go back</a>
-         </div>
-      </form>
+
+      <?php if ($fetch_posts): ?>
+         <form method="post">
+            <input type="hidden" name="postID" value="<?= htmlspecialchars($postID); ?>">
+            <div class="post-status" style="background-color:<?php if ($fetch_posts['postStatus'] == 'publish') {
+                                                                  echo 'limegreen';
+                                                               } else {
+                                                                  echo 'coral';
+                                                               }; ?>;">
+               <?= htmlspecialchars($fetch_posts['postStatus']); ?>
+            </div>
+            <?php if (!empty($fetch_posts['postImage'])) { ?>
+               <img src="../../uploads/articleImages/<?= htmlspecialchars($fetch_posts['postImage']); ?>" class="post-image" alt="">
+            <?php } ?>
+            <div class="post-title"><?= htmlspecialchars($fetch_posts['postTitle']); ?></div>
+            <div class="post-content"><?= htmlspecialchars($fetch_posts['postContent']); ?></div>
+            <div class="post-link"><?= htmlspecialchars($fetch_posts['postLink']); ?></div>
+            <div class="flex-btn">
+               <a href="../../articles/edit-post.php?id=<?= htmlspecialchars($postID); ?>" class="p-inline-option-btn">Edit</a>
+               <button type="submit" name="delete" class="p-inline-delete-btn" onclick="return confirm('Delete this post?');">Delete</button>
+               <a href="../../articles/view-post.php" class="p-inline-option-btn">Go back</a>
+            </div>
+         </form>
+      <?php endif; ?>
    </section>
 
    <!-- custom js file link  -->

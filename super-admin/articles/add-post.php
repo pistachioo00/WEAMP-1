@@ -9,8 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- CSS Style -->
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/posting.css">
 </head>
 <style>
     .tool-list {
@@ -82,24 +81,38 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar mt-5" style="background-color: #FFE5E5; border: 1.8px grey solid">
-        <div class="container my-4">
-            <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:35%; color: #304DA5;">Article Posting</h3>
+        <div class="container my-5">
+            <h3 class="fs-7 text-center" style="font-family: sub-font-bold; padding-top:20%; color: #304DA5;">Dashboard</h3>
             <hr style="background-color: black;">
-            <a href="article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+            <a href="#" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                SENA Assistance Desk
                 <img src="../../assets/user/Expand_right.svg" alt="expand_right">
-                Dashboard
             </a>
-            <a href="../articles/add-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../../assets/posting-pen.svg" alt="posting_pen">
-                Add posts
+            <a href="../sa-user-management.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                User Management
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a href="../articles/view-post.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../../assets/view-eye.svg" alt="expand_right">
-                View posts
+            <a href="../sa-rfa-status.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                RFA Status
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
-            <a href="../articles/seminar.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
-                <img src="../../assets/seminars.svg" alt="expand_right">
-                Seminars
+            <a href="../articles/article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%" onclick="toggleSubMenu(event)">
+                Articles
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <div class="sub-menu">
+                <div class="sub-menu-item">
+                    <a href="../articles/add-post.php">&nbsp;&nbsp;Add Article</a>
+                    <a href=" ../articles/view-post.php">&nbsp;&nbsp;View Article</a>
+                </div>
+            </div>
+            <a href=" ../articles/article-dashboard.php" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Seminar
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
+            </a>
+            <a href="#" class="nav-link mt-3" style="font-size: 1rem; font-family: sub-font; color: #304DA5; padding: left 35%">
+                Records Management
+                <img src="../../assets/user/Expand_right.svg" alt="expand_right">
             </a>
         </div>
     </div>
@@ -147,30 +160,57 @@
                 </a>
             </div>
         </nav>
+
+
+        <section class="post-editor" style="padding-top:4%;">
+            <h1 class="post-heading">Add new post</h1>
+
+            <form action="../articles/add-post-process.php" method="post" enctype="multipart/form-data">
+                <p>Post Title <span style="color:#C80000;">*</span></p>
+                <input type="text" name="postTitle" maxlength="100" required placeholder="Add post title" class="box-post">
+                <p>Post Content <span style="color:#C80000;">*</span></p>
+                <textarea name="postContent" class="box-post" required maxlength="20000" placeholder="Write your content..." cols="30" rows="10"></textarea>
+                <p>Post Link</p>
+                <input type="url" name="postLink" class="box-post">
+                <p>Post Image</p>
+                <input type="file" name="postImage" class="box-post">
+                <div class="flex-btn">
+                    <input type="submit" value="Publish Post" name="publish" class="post-btn">
+                    <input type="submit" value="Save Draft" name="draft" class="post-option-btn">
+                </div>
+            </form>
+        </section>
     </div>
-
-    <section class="post-editor" style="padding-bottom: 15%">
-        <h1 class="heading">Add new post</h1>
-        <form action="../articles/add-post-process.php" method="post" enctype="multipart/form-data">
-            <p>Post Title <span style="color:#C80000;">*</span></p>
-            <input type="text" name="postTitle" maxlength="100" required placeholder="Add post title" class="box-post">
-            <p>Post Content <span style="color:#C80000;">*</span></p>
-            <textarea name="postContent" class="box-post" required maxlength="20000" placeholder="Write your content..." cols="30" rows="10"></textarea>
-            <p>Post Link</p>
-            <input type="url" name="postLink" class="box-post">
-            <p>Post Image</p>
-            <input type="file" name="postImage" class="box-post">
-            <div class="flex-btn">
-                <input type="submit" value="Publish Post" name="publish" class="btn">
-                <input type="submit" value="Save Draft" name="draft" class="option-btn">
-            </div>
-        </form>
-    </section>
-
 
     <!-- custom js file link  -->
     <script src="../js/super-admin.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const articleLink = document.getElementById('articleLink');
+            const subMenu = document.querySelector('.sub-menu');
 
+            // Check if we're on the article dashboard page
+            if (window.location.href.includes("add-post.php")) {
+                subMenu.style.display = 'block'; // Automatically show the sub-menu
+            }
+
+            // Toggle sub-menu visibility when "Articles" link is clicked
+            articleLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent navigation if desired
+                subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+                window.location.href = "add-post.php"; // Redirect to the Articles page
+            });
+
+            // Hide the sub-menu when clicking on other sidebar links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    if (this !== articleLink) {
+                        subMenu.style.display = 'none'; // Hide sub-menu
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

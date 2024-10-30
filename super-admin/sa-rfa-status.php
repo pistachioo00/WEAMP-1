@@ -18,43 +18,47 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #C80000;">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 80px;">
+                <img src="../assets/WAO-Logo.svg" alt="Header-Title" style="width: 300px; height: 70px;">
             </a>
-            <button style="width: 10%; height: 50%" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse navbar-center" id="navbarSupportedContent">
                 <ul class="nav nav-underline navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
-                    <li class="nav-items">
+                    <li class="nav-item">
                         <a class="nav-link" href="../super-admin/sa-home.php">Home</a>
                     </li>
-                    <li class="nav-items">
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="../super-admin/sa-dashboard.php">Dashboard</a>
                     </li>
-                    <li class="nav-items">
-                        <a class="nav-link" href="../super-admin/sa-rfa-entries.php" id="rfaLink" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="click" data-bs-title="<strong>New Entries</strong>" data-bs-content="Assignment" data-bs-placement="bottom">RFA</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../super-admin/sa-rfa-entries.php">RFA</a>
                     </li>
-                    <li class="nav-items">
+                    <li class="nav-item">
                         <a class="nav-link" href="../super-admin/sa-sena-records.php">Records</a>
-                    </li>
-                    <div class="mr-5"></div>
-                    <li>
-                        <a class="nav-link" href="../super-admin/sa-account.php">
-                            <img src="../assets/User-register.svg" alt="Register" style="width: 20px; height: 20px; margin-right: 5px;">
-                            My Account
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="../super-admin/sa-login.php">
-                            <img src="../assets/Sign_in_squre.svg" alt="Sign-in" style="width: 20px; height: 20px; margin-right: 5px;">
-                            Log out
-                        </a>
                     </li>
                 </ul>
             </div>
+            <a href="#">
+                <ul class="navbar-nav ml-auto">
+            </a>
+            <a class="nav-link" href="../super-admin/sa-account.php" style="color: white">
+                <img src="../assets/User/User.svg" alt="My-Account"
+                    style="width: 20px; height: 20px; margin-right: 5px;">
+                My Account
+            </a>
+            <a class="nav-link" href="../logout.php" onclick="showLogoutConfirmation()" style="color: white">
+                <img src="../assets/User/Line1.svg" alt="Line"
+                    style="width: 20px; height: 20px; margin-right: 5px;">
+                <img src="../assets/User/Sign_out_squre.svg" alt="Sign-out"
+                    style="width: 20px; height: 20px; margin-right: 5px;">
+                Log Out
+            </a>
+            </ul>
+            </a>
 
             <!-- Popover Content -->
             <div id="popoverContent" style="display: none;">
@@ -71,6 +75,10 @@
         <div class="container">
             <div class="row justify-content-between mb-2" style="padding-top: 10%">
                 <div class="col ml-auto">
+                    <a href="../super-admin/sa-dashboard.php" class="fw-bold mt-3" style="font-family: sub-font-bold; font-size: 2rem; text-decoration: none; color:#232525;">
+                        <img src="../assets/user/Expand_left.svg" alt="expand_left">
+                        RFA Status
+                    </a>
                     <h4 class="fw-bold mt-3" style="font-family: sub-font-bold">RFA Status</h4>
                 </div>
             </div>
@@ -112,9 +120,9 @@
 
 
 
-    <footer class="footer fixed-bottom">
-        <div class="container-footer">
-            <p class="text-muted">Copyright 2024 © All Rights Reserved</br>
+    <footer class="footer fixed-bottom" style="background-color: #C80000;">
+        <div class="container-footer" style="color: white;">
+            <p>Copyright 2024 © All Rights Reserved</br>
                 Worker’s Affairs Office</p>
         </div>
     </footer>
@@ -122,13 +130,6 @@
 
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     // Initialize popovers
